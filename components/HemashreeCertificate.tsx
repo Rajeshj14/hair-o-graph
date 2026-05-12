@@ -1,6 +1,6 @@
 export default function HemashreeCertificate() {
   return (
-    <section className="relative overflow-hidden bg-[#f7f9ff] px-4 py-16 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-[#f7f9ff] px-4 py-6 sm:px-6 lg:px-8">
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(51,78,155,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(239,51,64,0.035)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
       <div className="relative mx-auto mb-10 max-w-3xl text-center">
@@ -20,7 +20,7 @@ export default function HemashreeCertificate() {
       </div>
 
       <div className="relative mx-auto grid max-w-6xl items-stretch gap-8 lg:grid-cols-2">
-        <div className="flex h-full flex-col justify-center border border-[#334E9B]/15 bg-white/92 p-6 shadow-xl shadow-[#334E9B]/8 backdrop-blur sm:p-8 lg:p-10">
+        <div className="order-2 flex h-full flex-col justify-center border border-[#334E9B]/15 bg-white/92 p-6 shadow-xl shadow-[#334E9B]/8 backdrop-blur sm:p-8 lg:order-1 lg:p-10">
           <div className="mb-5 inline-flex w-fit border border-[#EF3340]/25 bg-[#EF3340]/8 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EF3340]">
             Experience Certificate
           </div>
@@ -51,7 +51,7 @@ export default function HemashreeCertificate() {
           </div>
         </div>
 
-        <div className="relative min-h-[420px] overflow-hidden border border-[#334E9B]/15 bg-[#0b1020] shadow-xl shadow-[#334E9B]/8">
+        <div className="relative order-1 min-h-[420px] overflow-hidden border border-[#334E9B]/15 bg-[#0b1020] shadow-xl shadow-[#334E9B]/8 lg:order-2">
           <img
             src="/doctor.jpeg"
             alt="Clinical consultation"
