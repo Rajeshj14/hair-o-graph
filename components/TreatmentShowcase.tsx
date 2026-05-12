@@ -69,7 +69,7 @@ export default function TreatmentShowcase() {
         .tg-section {
           position: relative;
           overflow: hidden;
-          padding: 60px 24px;
+          padding: 26px 24px;
           background:
             radial-gradient(circle at 16% 20%, rgba(239,51,64,0.08), transparent 32%),
             radial-gradient(circle at 84% 16%, rgba(51,78,155,0.1), transparent 34%),
@@ -112,7 +112,7 @@ export default function TreatmentShowcase() {
           grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.55fr);
           gap: 44px;
           align-items: end;
-          margin-bottom: 48px;
+          margin-bottom: 10px;
         }
 
         .tg-kicker {
@@ -157,7 +157,7 @@ export default function TreatmentShowcase() {
 
         .tg-row {
           position: sticky;
-          top: 88px;
+          
           display: grid;
           grid-template-columns: minmax(310px, 0.58fr) minmax(0, 1fr);
           min-height: 430px;
