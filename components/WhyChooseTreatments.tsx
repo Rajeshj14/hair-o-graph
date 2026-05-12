@@ -40,6 +40,13 @@ export default function WhyChooseTreatments() {
           color: #111827;
           font-family: 'DM Sans', sans-serif;
         }
+        .why-sections {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: clamp(40px, 5vw, 64px);
+          font-weight: 900;
+          line-height: 0.96;
+          letter-spacing: 0;
+        }
 
         .why-section::before {
           content: '';
@@ -101,7 +108,7 @@ export default function WhyChooseTreatments() {
         .why-title {
           margin: 0;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(38px, 5vw, 66px);
+          font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           line-height: 0.96;
           letter-spacing: 0;

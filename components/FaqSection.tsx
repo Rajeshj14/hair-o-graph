@@ -113,7 +113,7 @@ export default function FaqSection() {
           margin: 0;
           max-width: 760px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(42px, 6vw, 82px);
+          font-size: clamp(40px, 5vw, 64px);
           line-height: 0.94;
           font-weight: 900;
           letter-spacing: 0;

@@ -132,7 +132,7 @@ export default function TreatmentShowcase() {
           margin: 0;
           max-width: 780px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(46px, 7vw, 96px);
+          font-size: clamp(40px, 5vw, 64px);
           line-height: 0.92;
           font-weight: 900;
           letter-spacing: 0;

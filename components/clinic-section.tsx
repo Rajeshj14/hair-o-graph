@@ -195,7 +195,7 @@ export default function ClinicSection() {
         .clinic-headline {
           display: block;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: 50px;
+          font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           color: #111827;
           line-height: 1.14;
@@ -517,7 +517,7 @@ export default function ClinicSection() {
           }
 
           .clinic-headline {
-            font-size: 42px;
+            font-size: clamp(40px, 5vw, 64px);
           }
 
           .clinic-hero {
@@ -570,7 +570,7 @@ export default function ClinicSection() {
           }
 
           .clinic-headline {
-            font-size: 34px;
+            font-size: clamp(40px, 5vw, 64px);
             margin-bottom: 15px;
           }
           .diff-list {

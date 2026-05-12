@@ -17,7 +17,7 @@ export default function ThankYouPage() {
                 Request Received
               </div>
 
-              <h1 className="font-serif text-4xl font-black leading-tight text-[#111827] sm:text-5xl lg:text-6xl">
+              <h1 className="font-serif text-[clamp(40px,5vw,64px)] font-black leading-tight text-[#111827]">
                 Thank you for reaching out.
               </h1>
 

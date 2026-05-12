@@ -97,7 +97,7 @@ export default function PrivacyPolicyPage() {
             margin: 0 auto;
             max-width: 640px;
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(34px, 6vw, 54px);
+            font-size: clamp(40px, 5vw, 64px);
             font-weight: 900;
             line-height: 1.1;
             color: #111827;

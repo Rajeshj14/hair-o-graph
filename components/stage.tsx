@@ -260,7 +260,7 @@ export default function ConsultationStages() {
           }
 
           .stage-heading {
-            font-size: 30px !important;
+            font-size: clamp(40px, 5vw, 64px) !important;
           }
 
           .stage-track {
@@ -335,8 +335,7 @@ export default function ConsultationStages() {
         </div>
 
         <h2
-          className="stage-heading font-playfair a2 font-black text-[#111827] leading-[1.18] tracking-[-0.01em] mb-4"
-          style={{ fontSize: 34 }}
+          className="stage-heading font-playfair a2 font-black text-[#111827] leading-[1.18] tracking-[-0.01em] mb-4 text-[clamp(40px,5vw,64px)]"
         >
           Your Journey to{" "}
           <span className="text-[#EF3340] italic">Confidence</span>

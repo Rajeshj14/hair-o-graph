@@ -107,7 +107,7 @@ export default function TestimonialsSection() {
           margin: 0;
           max-width: 740px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(44px, 6vw, 86px);
+          font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           line-height: 0.94;
           letter-spacing: 0;
