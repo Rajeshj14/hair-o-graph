@@ -2,6 +2,7 @@ import ClinicSection from "@/components/clinic-section";
 import FaqSection from "@/components/FaqSection";
 import MobileActionBar from "@/components/fat-mobile-action-bar";
 import Footer from "@/components/Footer";
+import HemashreeCertificate from "@/components/HemashreeCertificate";
 import HeroSection from "@/components/HeroSection";
 import Navbar from "@/components/Navbar";
 import ConsultationStages from "@/components/stage";
@@ -17,6 +18,7 @@ export default function Home() {
     <HeroSection />
     <ConsultationStages />
     <ClinicSection />
+    <HemashreeCertificate />
     <TreatmentShowcase />
     <WhyChooseTreatments />
     <TestimonialsSection />

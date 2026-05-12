@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react";
 
 // ─── Replace with your actual video files ────────────────────────────────────
 const videos = [
-  { id: 0, src: "/videos/hair-treatment.mp4" },
-  { id: 1, src: "/videos/skin-treatment.mp4" },
-  { id: 2, src: "/videos/dental-treatment.mp4" },
-  { id: 3, src: "/videos/clinic-tour.mp4" },
+  { id: 0, src: "  https://ik.imagekit.io/sa0fw9cfy/videos.mp4" },
+  // { id: 1, src: "/videos/skin-treatment.mp4" },
+  // { id: 2, src: "/videos/dental-treatment.mp4" },
+  // { id: 3, src: "/videos/clinic-tour.mp4" },
 ];
 
 // ─── Replace with your actual banner images ───────────────────────────────────
@@ -150,7 +150,7 @@ export default function ClinicHero() {
           }
 
           .clinic-hero-video {
-            min-height: 420px;
+            min-height: 220px;
           }
 
           .clinic-stats {
@@ -170,7 +170,7 @@ export default function ClinicHero() {
           }
 
           .clinic-hero-content {
-            padding: 34px 22px !important;
+            padding: 70px 22px !important;
           }
 
           .clinic-hero-title {
