@@ -11,7 +11,7 @@ const treatmentCategories = [
     intro:
       "Advanced solutions to control hair fall, restore growth, and improve scalp health.",
     treatments: [
-      ["PRP (Platelet-Rich Plasma)", "Stimulates natural hair growth using your own blood plasma."],
+      ["Advanced Hair Regrowth Therapy", "Stimulates natural hair growth using your own blood plasma."],
       ["GFC (Growth Factor Concentrate)", "Advanced therapy that boosts hair strength and density."],
       [" UV light Therapy", "Permanent solution to restore hair in thinning areas."],
       ["Hair Regrowth Treatments", "Non-surgical treatments to reduce hair fall and improve thickness."],
@@ -35,7 +35,7 @@ const treatmentCategories = [
       ["Chemical Peel", "Removes dead skin and improves brightness and texture."],
       ["Laser Hair Reduction", "Long-term solution for unwanted body hair."],
       ["Carbon Peel", "Advanced facial for oil control, pores, and skin brightness."],
-      ["Botox & Fillers", "Reduces wrinkles and enhances facial features."],
+      // ["Botox & Fillers", "Reduces wrinkles and enhances facial features."],
       ["Glutathione IV Therapy", "Improves skin tone and overall radiance."],
     ],
   },
