@@ -59,22 +59,8 @@ export default function PrivacyPolicyPage() {
             position: relative;
             overflow: hidden;
             padding: 72px 24px 56px;
-            background:
-              radial-gradient(circle at 10% 20%, rgba(239,51,64,0.08), transparent 38%),
-              radial-gradient(circle at 85% 15%, rgba(51,78,155,0.12), transparent 40%);
+            background: transparent;
             text-align: center;
-          }
-
-          .pp-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background-image:
-              linear-gradient(rgba(51,78,155,0.04) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(239,51,64,0.03) 1px, transparent 1px);
-            background-size: 56px 56px;
-            mask-image: linear-gradient(to bottom, black, transparent 90%);
           }
 
           .pp-badge {

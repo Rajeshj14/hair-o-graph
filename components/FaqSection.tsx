@@ -61,24 +61,9 @@ export default function FaqSection() {
           position: relative;
           overflow: hidden;
           padding: 50px 24px;
-          background:
-            radial-gradient(circle at 18% 18%, rgba(51,78,155,0.12), transparent 34%),
-            radial-gradient(circle at 86% 26%, rgba(239,51,64,0.08), transparent 32%),
-            linear-gradient(180deg, #ffffff 0%, #eef3ff 48%, #f8fbff 100%);
+          background: linear-gradient(180deg, #ffffff 0%, #eef3ff 48%, #f8fbff 100%);
           color: #111827;
           font-family: 'DM Sans', sans-serif;
-        }
-
-        .faq-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(51,78,155,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.03) 1px, transparent 1px);
-          background-size: 68px 68px;
-          mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
         }
 
         .faq-wrap {
@@ -89,32 +74,54 @@ export default function FaqSection() {
         }
 
         .faq-head {
-          display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(320px, 0.55fr);
-          gap: 42px;
-          align-items: end;
-          margin-bottom: 46px;
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          margin: 0 auto 40px;
+          text-align: center;
+        }
+
+        .faq-head::after {
+          content: '';
+          display: block;
+          width: 74px;
+          height: 2px;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
         }
 
         .faq-kicker {
-          width: fit-content;
-          margin-bottom: 18px;
-          padding: 7px 14px;
-          border: 1px solid rgba(239,51,64,0.32);
-          background: rgba(239,51,64,0.08);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
           color: #EF3340;
           font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.18em;
+          font-weight: 900;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
         }
 
+        .faq-kicker::before,
+        .faq-kicker::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .faq-kicker::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
+        }
+
         .faq-title {
-          margin: 0;
-          max-width: 760px;
+          margin: 0 0 14px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(40px, 5vw, 64px);
-          line-height: 0.94;
+          font-size: clamp(30px, 3.4vw, 44px);
+          line-height: 1.12;
           font-weight: 900;
           letter-spacing: 0;
         }
@@ -125,10 +132,12 @@ export default function FaqSection() {
         }
 
         .faq-lead {
-          margin: 0;
+          max-width: 540px;
+          margin: 0 auto;
           color: rgba(51,65,85,0.72);
-          font-size: 14px;
-          line-height: 1.85;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.74;
         }
 
         .faq-grid {
@@ -243,15 +252,26 @@ export default function FaqSection() {
           }
 
           .faq-head {
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-bottom: 10px;
+            max-width: 600px;
           }
         }
 
         @media (max-width: 760px) {
           .faq-section {
             padding: 16px 16px;
+          }
+
+          .faq-head {
+            max-width: 360px;
+            margin-bottom: 30px;
+          }
+
+          .faq-title {
+            font-size: 29px;
+          }
+
+          .faq-lead {
+            font-size: 13.5px;
           }
 
           .faq-grid {

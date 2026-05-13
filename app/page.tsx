@@ -1,7 +1,7 @@
-import ClinicSection from "@/components/clinic-section";
 import FaqSection from "@/components/FaqSection";
 import MobileActionBar from "@/components/fat-mobile-action-bar";
 import Footer from "@/components/Footer";
+import HairOGraftOverview from "@/components/HairOGraftOverview";
 import HemashreeCertificate from "@/components/HemashreeCertificate";
 import HeroSection from "@/components/HeroSection";
 import Navbar from "@/components/Navbar";
@@ -17,13 +17,12 @@ export default function Home() {
     <Navbar />
     <HeroSection />
     <ConsultationStages />
-    <ClinicSection />
+    <HairOGraftOverview />
     <HemashreeCertificate />
     <TreatmentShowcase />
     <WhyChooseTreatments />
     <TestimonialsSection />
     <FaqSection />
-
     <Footer />
 
 

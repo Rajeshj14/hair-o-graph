@@ -1,17 +1,100 @@
 export default function HemashreeCertificate() {
   return (
-    <section className="relative overflow-hidden bg-[#f7f9ff] px-4 py-6 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(51,78,155,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(239,51,64,0.035)_1px,transparent_1px)] bg-[size:64px_64px]" />
+    <section id="doctor" className="relative overflow-hidden bg-[#f7f9ff] px-4 py-6 sm:px-6 lg:px-8">
+      <style>{`
+        .doctor-header {
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          margin: 0 auto 40px;
+          text-align: center;
+        }
 
-      <div className="relative mx-auto mb-10 max-w-3xl text-center">
-        <div className="mb-4 inline-flex border border-[#EF3340]/25 bg-[#EF3340]/8 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EF3340]">
+        .doctor-header::after {
+          content: '';
+          display: block;
+          width: 74px;
+          height: 2px;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
+        }
+
+        .doctor-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: #EF3340;
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+
+        .doctor-kicker::before,
+        .doctor-kicker::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .doctor-kicker::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
+        }
+
+        .doctor-heading {
+          margin: 0 0 14px;
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: clamp(30px, 3.4vw, 44px);
+          font-weight: 900;
+          color: #111827;
+          line-height: 1.12;
+          letter-spacing: 0;
+        }
+
+        .doctor-heading span {
+          color: #EF3340;
+          font-style: italic;
+        }
+
+        .doctor-lead {
+          max-width: 540px;
+          margin: 0 auto;
+          color: rgba(51,65,85,0.72);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.74;
+        }
+
+        @media (max-width: 640px) {
+          .doctor-header {
+            max-width: 360px;
+            margin-bottom: 30px;
+          }
+
+          .doctor-heading {
+            font-size: 29px;
+          }
+
+          .doctor-lead {
+            font-size: 13.5px;
+          }
+        }
+      `}</style>
+
+      <div className="doctor-header">
+        <div className="doctor-kicker">
           Doctor Profile
         </div>
-        <h2 className="why-sections">
-          Meet Your Skin & &apos;{" "}
-          <span className="text-[#EF3340]">Hair Specialist</span>
+        <h2 className="doctor-heading">
+          Meet Our {" "}
+          <span>Expert</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+        <p className="doctor-lead">
          Dr. E. Hema Shree  BDS | FMC, Aesthetic Practitioner & Cosmetology Specialist
         </p>
       </div>
@@ -26,7 +109,7 @@ export default function HemashreeCertificate() {
 
           <div className="mt-6 space-y-5 text-[15px] leading-8 text-slate-600">
             <p>
-              TDr. Hema Shree is a qualified aesthetic practitioner with 5+ years of clinical experience in skin, hair, and cosmetology treatments, including PRP, GFC, HydraFacial, chemical peels, and microneedling procedures.
+              TDr. Hema Shree is a qualified aesthetic practitioner with 5+ years of clinical experience in Advanced skin, hair, and cosmetology treatments.
             </p>
 
             <p>
@@ -37,7 +120,7 @@ export default function HemashreeCertificate() {
 
         <div className="relative order-1 min-h-[420px] overflow-hidden border border-[#334E9B]/15 bg-[#0b1020] shadow-xl shadow-[#334E9B]/8 lg:order-2">
           <img
-            src="/doctor.jpeg"
+            src="/doctors.jpeg"
             alt="Clinical consultation"
             className="absolute inset-0 h-full w-full object-cover"
           />

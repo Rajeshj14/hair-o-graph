@@ -12,7 +12,7 @@ const bgImages = [
 const stats = [
   { num: "1000+", label: "Happy Patients" },
   { num: "4.7/5", label: "Google Rating" },
-  { num: "100%", label: "Certified Doctors" },
+  { num: "100%", label: "Certified Doctors " },
   { num: "Safe", label: "Effective Treatments" },
 ];
 
@@ -136,6 +136,14 @@ export default function ClinicHero() {
           color: #fffaf0;
         }
 
+        .hero-title-line {
+          display: inline-flex;
+          align-items: baseline;
+          flex-wrap: wrap;
+          column-gap: 0;
+          row-gap: 0;
+        }
+
         .hero-title em {
           color: #EF3340;
           font-style: italic;
@@ -145,9 +153,113 @@ export default function ClinicHero() {
           color: #b7c7ff;
         }
 
+        .hero-title-rotator {
+          display: inline-block;
+          position: relative;
+          width: 8.35em;
+          height: 1.16em;
+          margin: 0;
+          overflow: hidden;
+          vertical-align: -0.16em;
+          line-height: 1.08;
+        }
+
+        .hero-title-rotator .hero-word {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          display: block;
+          font-style: italic;
+          white-space: nowrap;
+          text-align: left;
+          opacity: 0;
+          transform: translateY(110%);
+          animation-duration: 7.2s;
+          animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+          animation-iteration-count: infinite;
+          will-change: transform, opacity;
+        }
+
+        .hero-word-hair {
+          color: #EF3340;
+          animation-name: heroHairLoop;
+        }
+
+        .hero-word-skin {
+          color: #b7c7ff;
+          animation-name: heroSkinLoop;
+        }
+
+        .hero-word-dental {
+          color: #fffaf0;
+          animation-name: heroDentalLoop;
+        }
+
+        .hero-title-static {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        @keyframes heroHairLoop {
+          0%, 24% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          31%, 98% {
+            opacity: 0;
+            transform: translateY(-115%);
+          }
+          99% {
+            opacity: 0;
+            transform: translateY(115%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes heroSkinLoop {
+          0%, 31% {
+            opacity: 0;
+            transform: translateY(115%);
+          }
+          38%, 57% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          64%, 100% {
+            opacity: 0;
+            transform: translateY(115%);
+          }
+        }
+
+        @keyframes heroDentalLoop {
+          0%, 64% {
+            opacity: 0;
+            transform: translateY(115%);
+          }
+          71%, 91% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          98%, 100% {
+            opacity: 0;
+            transform: translateY(-115%);
+          }
+        }
+
         .hero-lead {
           max-width: 520px;
-          margin: 24px 0 0;
+          margin: 10px 0 0;
           color: rgba(255,255,255,0.78);
           font-size: 16px;
           line-height: 1.82;
@@ -158,7 +270,7 @@ export default function ClinicHero() {
           flex-wrap: wrap;
           gap: 14px;
           align-items: center;
-          margin-top: 34px;
+          margin-top: 24px;
         }
 
         .hero-cta {
@@ -286,10 +398,8 @@ export default function ClinicHero() {
         }
 
         .hero-stats {
-          position: relative;
-          z-index: 2;
-          width: min(100%, 1240px);
-          margin: 38px auto 0;
+          width: min(100%, 650px);
+          margin: 28px 0 0;
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
           border: 1px solid rgba(255,255,255,0.13);
@@ -371,12 +481,16 @@ export default function ClinicHero() {
           }
 
           .hero-lead {
+            margin: 5px 0 0;
             font-size: 14px;
             line-height: 1.75;
           }
 
           .hero-form {
             padding: 22px;
+          }
+          .hero-actions{
+           margin-top: 12px;
           }
 
           .form-grid {
@@ -385,7 +499,7 @@ export default function ClinicHero() {
 
           .hero-stats {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-top: 24px;
+            margin-top: 18px;
           }
 
           .hero-stat:nth-child(2) {
@@ -418,10 +532,23 @@ export default function ClinicHero() {
       <div className="w-full">
         <div className="hero-grid">
           <div>
-            <div className="hero-kicker">Trusted Clinic in Chennai</div>
+            <div className="hero-kicker">1# Trusted Clinic in Chennai</div>
             <h1 className="hero-title">
-              Advanced Care for <em>Hair</em>, <span>Skin</span> and Dental
-              Treatments
+              Advanced Care for
+              <span className="hero-title-static">
+                Hair, Skin and Dental
+              </span>
+              <span className="hero-title-line" aria-hidden="true">
+                <span className="hero-title-rotator">
+                  <em className="hero-word hero-word-hair">Hair Treatments</em>
+                  <span className="hero-word hero-word-skin">
+                    Skin Treatments
+                  </span>
+                  <span className="hero-word hero-word-dental">
+                    Dental Treatments
+                  </span>
+                </span>
+              </span>
             </h1>
             <p className="hero-lead">
               Personalized, technology-driven treatments designed to restore
@@ -437,11 +564,20 @@ export default function ClinicHero() {
                   window.dispatchEvent(new Event("open-booking-modal"))
                 }
               >
-                Book Your Consultation
+                Book your Free Consultation
               </button>
               <span className="hero-note">
                 Hair, skin, and dental care under one roof.
               </span>
+            </div>
+
+            <div className="hero-stats">
+              {stats.map((stat) => (
+                <div className="hero-stat" key={stat.label}>
+                  <strong>{stat.num}</strong>
+                  <span>{stat.label}</span>
+                </div>
+              ))}
             </div>
 
             <div className="hero-dots" aria-label="Hero banner images">
@@ -515,15 +651,6 @@ export default function ClinicHero() {
               </button>
             </form>
           </div>
-        </div>
-
-        <div className="hero-stats">
-          {stats.map((stat) => (
-            <div className="hero-stat" key={stat.label}>
-              <strong>{stat.num}</strong>
-              <span>{stat.label}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

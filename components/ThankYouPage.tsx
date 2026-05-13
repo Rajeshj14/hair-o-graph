@@ -4,10 +4,6 @@ import { CalendarCheck, CheckCircle2, Home, PhoneCall } from "lucide-react";
 export default function ThankYouPage() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#f7f9ff] px-4 pb-16 pt-28 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(51,78,155,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(239,51,64,0.035)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      <div className="absolute left-0 top-20 h-56 w-56 rounded-full bg-[#EF3340]/10 blur-3xl" />
-      <div className="absolute bottom-12 right-0 h-72 w-72 rounded-full bg-[#334E9B]/12 blur-3xl" />
-
       <div className="relative mx-auto flex min-h-[calc(100vh-176px)] max-w-5xl items-center justify-center">
         <div className="w-full border border-[#334E9B]/15 bg-white/90 shadow-2xl shadow-[#334E9B]/10 backdrop-blur">
           <div className="grid overflow-hidden lg:grid-cols-[1fr_0.85fr]">

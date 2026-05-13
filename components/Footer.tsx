@@ -28,24 +28,9 @@ export default function Footer() {
           position: relative;
           overflow: hidden;
           padding: 50px 24px 0;
-          background:
-            radial-gradient(circle at 12% 12%, rgba(239,51,64,0.08), transparent 32%),
-            radial-gradient(circle at 88% 18%, rgba(51,78,155,0.12), transparent 36%),
-            linear-gradient(180deg, #eef3ff 0%, #ffffff 100%);
+          background: linear-gradient(180deg, #eef3ff 0%, #ffffff 100%);
           color: #111827;
           font-family: 'DM Sans', sans-serif;
-        }
-
-        .footer-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(51,78,155,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.03) 1px, transparent 1px);
-          background-size: 64px 64px;
-          mask-image: linear-gradient(to bottom, black, transparent 86%);
         }
 
         .footer-wrap {
@@ -242,7 +227,7 @@ export default function Footer() {
               type="button"
               onClick={() => window.dispatchEvent(new Event("open-booking-modal"))}
             >
-              Book Your Consultation
+              Book your Free Consultation
             </button>
           </div>
 
@@ -277,7 +262,7 @@ export default function Footer() {
               </div>
               <div className="contact-card">
                 <div className="contact-label">Location</div>
-                <div className="contact-value">Ambattur, Chennai</div>
+                <div className="contact-value">256, New Military Rd, opposite to avadi corporation office, Nehru Bazaar, Thirumalai Rajapuram, Avadi, Chennai, Tamil Nadu 600054</div>
               </div>
               <div className="contact-card">
                 <div className="contact-label">Care</div>

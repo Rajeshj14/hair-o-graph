@@ -71,33 +71,8 @@ export default function TreatmentsSection() {
           overflow: hidden;
           padding: 110px 24px 116px;
           color: #f6f0e5;
-          background:
-            radial-gradient(circle at 20% 8%, rgba(239,51,64,0.11), transparent 34%),
-            radial-gradient(circle at 82% 34%, rgba(100,130,116,0.08), transparent 32%),
-            linear-gradient(180deg, #050504 0%, #0b0b08 42%, #050504 100%);
+          background: linear-gradient(180deg, #050504 0%, #0b0b08 42%, #050504 100%);
           font-family: 'DM Sans', sans-serif;
-        }
-
-        .tx-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(239,51,64,0.042) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.032) 1px, transparent 1px);
-          background-size: 76px 76px;
-          mask-image: radial-gradient(circle at 50% 28%, black, transparent 74%);
-        }
-
-        .tx-section::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0.09;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-          background-size: 220px 220px;
         }
 
         .tx-shell {
@@ -676,7 +651,7 @@ export default function TreatmentsSection() {
             className="tx-cta"
             onClick={() => window.dispatchEvent(new Event("open-booking-modal"))}
           >
-            Book Your Consultation
+            Book your Free Consultation
           </button>
         </div>
       </div>

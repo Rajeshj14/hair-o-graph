@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const stages = [
   {
@@ -38,199 +38,280 @@ const stages = [
 ];
 
 export default function ConsultationStages() {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const [activeStage, setActiveStage] = useState(0);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const goToStage = (index: number) => {
+    const nextIndex = (index + stages.length) % stages.length;
+    setActiveStage(nextIndex);
+    cardRefs.current[nextIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  };
+
+  const handleStageScroll = () => {
+    if (!trackRef.current) return;
+
+    const trackLeft = trackRef.current.getBoundingClientRect().left;
+    const closestIndex = cardRefs.current.reduce((closest, card, index) => {
+      if (!cardRefs.current[closest] || !card) return closest;
+      const currentDistance = Math.abs(
+        card.getBoundingClientRect().left - trackLeft
+      );
+      const closestDistance = Math.abs(
+        cardRefs.current[closest]!.getBoundingClientRect().left - trackLeft
+      );
+      return currentDistance < closestDistance ? index : closest;
+    }, 0);
+
+    setActiveStage(closestIndex);
+  };
 
   return (
-    <div id="our-team"
+    <div
+      id="our-team"
       className="consultation-section font-sans min-h-screen flex flex-col items-center justify-center py-10 px-6"
       style={{ background: "#f7f9ff" }}
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
         .font-playfair { font-family: 'Playfair Display', Georgia, serif; }
-        .font-dm       { font-family: 'DM Sans', sans-serif; }
+        .font-dm { font-family: 'DM Sans', sans-serif; }
 
-        /* subtle page grain */
-        .page-grain {
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          background-size: 180px 180px;
-        }
-        .page-grid {
-          background-image:
-            linear-gradient(rgba(51,78,155,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(51,78,155,0.03) 1px, transparent 1px);
-          background-size: 60px 60px;
-        }
-
-        /* ── CARD ── */
-        .stage-card {
+        .consultation-section {
           position: relative;
           overflow: hidden;
-          cursor: pointer;
-          flex: 1;
-          border: 1px solid rgba(51,78,155,0.16);
-          transition: border-color 0.3s ease, transform 0.35s ease, box-shadow 0.35s ease;
-        }
-        .stage-card:hover {
-          border-color: rgba(239,51,64,0.6);
-          transform: translateY(-5px);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-          z-index: 10;
+          background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 58%, #eef3ff 100%) !important;
         }
 
-        /* Image — ALWAYS visible, slightly dims on hover for text pop */
-        .card-img {
-          position: absolute;
-          inset: 0;
-          background-size: cover;
-          background-position: center top;
-          transition: transform 0.6s ease, filter 0.4s ease;
-          filter: brightness(0.75) saturate(0.8);
-        }
-        .stage-card:hover .card-img {
-          transform: scale(1.04);
-          filter: brightness(0.55) saturate(0.7);
-        }
-
-        /* ── PERMANENT bottom gradient — always guarantees readability ── */
-        .card-scrim {
-          position: absolute;
-          inset: 0;
-          /* Heavy at bottom where text lives, clears at top */
-          background: linear-gradient(
-            to bottom,
-            rgba(5,5,3,0.08)  0%,
-            rgba(5,5,3,0.10) 30%,
-            rgba(5,5,3,0.50) 55%,
-            rgba(5,5,3,0.88) 72%,
-            rgba(5,5,3,0.97) 100%
-          );
-          transition: background 0.4s ease;
+        .stage-header {
+          position: relative;
           z-index: 1;
-        }
-        .stage-card:hover .card-scrim {
-          background: linear-gradient(
-            to bottom,
-            rgba(5,5,3,0.18)  0%,
-            rgba(5,5,3,0.20) 25%,
-            rgba(5,5,3,0.62) 50%,
-            rgba(5,5,3,0.92) 68%,
-            rgba(5,5,3,0.98) 100%
-          );
+          max-width: 600px;
+          margin: 0 auto 40px;
+          text-align: center;
         }
 
-        /* Gold top accent bar */
-        .top-bar {
-          position: absolute;
-          top: 0; left: 0; right: 0;
+        .stage-header::after {
+          content: '';
+          display: block;
+          width: 74px;
           height: 2px;
-          background: linear-gradient(90deg, #EF3340 0%, rgba(239,51,64,0.15) 100%);
-          z-index: 3;
-          opacity: 0;
-          transition: opacity 0.3s;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
         }
-        .stage-card:hover .top-bar { opacity: 1; }
 
-        /* Step number — top left */
+        .stage-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: #EF3340;
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+
+        .stage-kicker::before,
+        .stage-kicker::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .stage-kicker::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
+        }
+
+        .stage-heading {
+          margin: 0 0 14px;
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: clamp(30px, 3.4vw, 44px);
+          font-weight: 900;
+          color: #111827;
+          line-height: 1.12;
+          letter-spacing: 0;
+        }
+
+        .stage-heading span {
+          color: #EF3340;
+          font-style: italic;
+        }
+
+        .stage-lead {
+          max-width: 540px;
+          margin: 0 auto;
+          color: rgba(51,65,85,0.72);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.74;
+        }
+
+        .stage-track {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 1280px;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 22px;
+        }
+
+        .stage-carousel-controls {
+          display: none;
+        }
+
+        .stage-card {
+          position: relative;
+          min-width: 0;
+          overflow: hidden;
+          padding: 1px;
+          clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
+          background: linear-gradient(135deg, #EF3340 0%, rgba(51,78,155,0.72) 55%, rgba(239,51,64,0.18) 100%);
+          isolation: isolate;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .stage-card::before {
+          content: '';
+          position: absolute;
+          inset: 1px;
+          clip-path: inherit;
+          background:
+            linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          z-index: 0;
+          transition: background 0.25s ease;
+        }
+
+        .stage-card:hover {
+          transform: translateY(-5px);
+          background: linear-gradient(135deg, #EF3340, #334E9B, rgba(239,51,64,0.42));
+        }
+
+        .stage-card:hover::before {
+          background: #ffffff;
+        }
+
+        .stage-card::after {
+          content: '';
+          position: absolute;
+          left: 22px;
+          right: 22px;
+          bottom: 0;
+          z-index: 1;
+          height: 3px;
+          background: linear-gradient(90deg, #EF3340, #334E9B);
+          transform: scaleX(0.38);
+          transform-origin: left;
+          transition: transform 0.25s ease;
+        }
+
+        .stage-card:hover::after {
+          transform: scaleX(1);
+        }
+
+        .stage-image {
+          position: relative;
+          z-index: 1;
+          aspect-ratio: 1.1 / 1;
+          overflow: hidden;
+          background: #0b1020;
+          margin: 12px 12px 0;
+          clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+        }
+
+        .stage-image img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: saturate(0.96) contrast(1.03);
+          transition: transform 0.55s ease;
+        }
+
+        .stage-card:hover .stage-image img {
+          transform: scale(1.05);
+        }
+
+        .stage-image::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(to top, rgba(3,7,18,0.62), rgba(3,7,18,0.04) 62%),
+            linear-gradient(135deg, rgba(239,51,64,0.16), transparent 45%);
+          pointer-events: none;
+        }
+
         .step-num {
           position: absolute;
-          top: 18px; left: 20px;
-          z-index: 3;
+          left: 16px;
+          bottom: 14px;
+          z-index: 1;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          color: rgba(239,51,64,0.6);
-          text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-          transition: color 0.3s;
-        }
-        .stage-card:hover .step-num { color: rgba(239,51,64,0.95); }
-
-        /* ── CONTENT at bottom — always visible, always readable ── */
-        .card-content {
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          padding: 0 22px 24px;
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-        }
-
-        /* Emoji */
-        .card-emoji {
-          font-size: 26px;
-          margin-bottom: 10px;
-          display: block;
-          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
-          transition: transform 0.35s ease;
-          line-height: 1;
-        }
-        .stage-card:hover .card-emoji { transform: translateY(-3px) scale(1.08); }
-
-        /* Title — always clearly visible */
-        .card-title {
-          font-family: 'Playfair Display', Georgia, serif;
-          font-size: 17px;
+          color: #ffffff;
+          font-size: 52px;
           font-weight: 900;
-          line-height: 1.22;
-          color: #f8f4ea;
-          text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1);
-          margin: 0;
-          transition: color 0.25s;
+          line-height: 0.8;
         }
-        .stage-card:hover .card-title { color: #fff; }
 
-        /* Gold divider line — slides in on hover */
+        .card-content {
+          position: relative;
+          z-index: 1;
+          min-height: 214px;
+          padding: 24px 24px 30px;
+        }
+
+        .card-emoji {
+          display: none;
+        }
+
+        .card-title {
+          margin: 0;
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #111827;
+          font-size: 27px;
+          font-weight: 900;
+          line-height: 1.05;
+        }
+
         .brand-line {
           display: block;
-          height: 1px;
-          width: 0;
-          background: linear-gradient(90deg, #EF3340, transparent);
-          margin-top: 10px;
-          margin-bottom: 0;
-          transition: width 0.38s ease 0.08s, margin-bottom 0.38s ease;
-        }
-        .stage-card:hover .brand-line {
-          width: 40px;
-          margin-bottom: 10px;
+          width: 58px;
+          height: 2px;
+          margin: 16px 0 14px;
+          background: linear-gradient(90deg, #EF3340, #334E9B);
         }
 
-        /* Description — always rendered in DOM, slides up on hover */
         .card-desc {
+          margin: 0;
+          color: rgba(51,65,85,0.74);
           font-family: 'DM Sans', sans-serif;
-          font-size: 12.5px;
+          font-size: 15.5px;
           font-weight: 400;
-          line-height: 1.65;
-          color: rgba(245,238,215,0.82);
-          text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-          max-height: 0;
-          overflow: hidden;
-          opacity: 0;
-          transition: max-height 0.42s ease, opacity 0.38s ease 0.1s;
-        }
-        .stage-card:hover .card-desc {
-          max-height: 120px;
-          opacity: 1;
+          line-height: 1.72;
         }
 
-        /* Connector line between cards */
         .connector {
           position: absolute;
-          top: 50%; right: 0;
-          width: 1px; height: 36%;
-          transform: translateY(-50%);
-          background: linear-gradient(to bottom, transparent, rgba(51,78,155,0.3), transparent);
-          z-index: 4;
+          top: 50%;
+          right: -10px;
+          z-index: 3;
+          width: 20px;
+          height: 20px;
+          border-top: 1px solid rgba(51,78,155,0.42);
+          border-right: 1px solid rgba(239,51,64,0.55);
+          transform: translateY(-50%) rotate(45deg);
+          background: #f7f9ff;
         }
-
-        /* Section header anims */
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .a1 { animation: fadeUp 0.55s ease 0.05s both; }
-        .a2 { animation: fadeUp 0.55s ease 0.18s both; }
-        .a3 { animation: fadeUp 0.55s ease 0.3s both; }
 
         @media (max-width: 1024px) {
           .consultation-section {
@@ -239,14 +320,7 @@ export default function ConsultationStages() {
           }
 
           .stage-track {
-            display: grid !important;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            height: auto !important;
-            gap: 16px !important;
-          }
-
-          .stage-card {
-            min-height: 360px;
           }
 
           .connector {
@@ -259,52 +333,105 @@ export default function ConsultationStages() {
             padding: 16px 16px !important;
           }
 
+          .stage-header {
+            max-width: 360px;
+            margin-bottom: 30px;
+          }
+
           .stage-heading {
-            font-size: clamp(40px, 5vw, 64px) !important;
+            font-size: 29px;
+          }
+
+          .stage-lead {
+            font-size: 13.5px;
           }
 
           .stage-track {
-            display: flex !important;
-            grid-template-columns: none;
-            gap: 14px !important;
+            display: flex;
+            width: calc(100% + 32px);
+            max-width: none;
             margin: 0 -16px;
-            padding: 0 16px 12px;
+            gap: 14px;
             overflow-x: auto;
+            padding: 2px 16px 14px;
             scroll-snap-type: x mandatory;
-            scroll-padding-left: 16px;
+            scroll-padding-inline: 16px;
             -webkit-overflow-scrolling: touch;
-          }
-
-          .stage-card {
-            flex: 0 0 84%;
-            min-height: 330px;
-            scroll-snap-align: start;
-          }
-
-          .stage-card:hover {
-            transform: none;
+            scrollbar-width: none;
           }
 
           .stage-track::-webkit-scrollbar {
-            height: 4px;
+            display: none;
           }
 
-          .stage-track::-webkit-scrollbar-track {
-            background: rgba(51,78,155,0.08);
+          .stage-card {
+            flex: 0 0 min(86vw, 340px);
+            scroll-snap-align: center;
+            clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
           }
 
-          .stage-track::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #EF3340, #334E9B);
+          .stage-image {
+            aspect-ratio: 1.38 / 1;
+            margin: 10px 10px 0;
+            clip-path: polygon(13px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
           }
 
-          .card-desc {
-            max-height: 140px;
-            opacity: 1;
+          .card-content {
+            min-height: auto;
+            padding: 22px 20px 25px;
           }
 
-          .brand-line {
-            width: 40px;
-            margin-bottom: 10px;
+          .card-title {
+            font-size: 25px;
+          }
+
+          .stage-carousel-controls {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            width: 100%;
+            margin-top: 8px;
+          }
+
+          .stage-carousel-btn {
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(51,78,155,0.18);
+            border-radius: 999px;
+            background: #ffffff;
+            color: #334E9B;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(31,45,83,0.08);
+          }
+
+          .stage-carousel-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+          }
+
+          .stage-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border: 0;
+            padding: 0;
+            border-radius: 999px;
+            background: rgba(51,78,155,0.25);
+            cursor: pointer;
+            transition: width 0.2s ease, background 0.2s ease;
+          }
+
+          .stage-carousel-dot.is-active {
+            width: 22px;
+            background: #EF3340;
           }
 
           .stage-cta-strip {
@@ -318,68 +445,39 @@ export default function ConsultationStages() {
         }
       `}</style>
 
-      {/* page bg grain + grid */}
-      <div className="fixed inset-0 z-0 pointer-events-none page-grain page-grid" style={{ opacity: 0.55 }} />
-      <div
-        className="fixed inset-0 z-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(51,78,155,0.1) 0%, transparent 55%)" }}
-      />
+      <div id="process"  className="stage-header">
+        <div className="stage-kicker">Stages of Consultation</div>
 
-      {/* ── Section header ── */}
-      <div className="relative z-10 text-center mb-12 max-sm:mb-4" style={{ maxWidth: 560 }}>
-        <div className="a1 inline-flex items-center gap-2 max-sm:mb-2 mb-5 px-3 py-[5px]
-                        text-[10px] font-semibold tracking-[0.18em] uppercase
-                        text-[#EF3340] bg-[rgba(51,78,155,0.08)]
-                        border border-[rgba(51,78,155,0.25)] rounded-[2px]">
-       Stages of Consultation
-        </div>
-
-        <h2
-          className="stage-heading font-playfair a2 font-black text-[#111827] leading-[1.18] tracking-[-0.01em] mb-4 text-[clamp(40px,5vw,64px)]"
-        >
-          Your Journey to{" "}
-          <span className="text-[#EF3340] italic">Confidence</span>
+        <h2 className="stage-heading">
+          Your Journey to <span>Confidence</span>
         </h2>
 
-        <p
-          className="font-dm a3 font-light text-[rgba(51,65,85,0.72)] leading-relaxed"
-          style={{ fontSize: 13.5, maxWidth: 400, margin: "0 auto" }}
-        >
-          From your first appointment to your final results — we walk with you every step of the way.
+        <p className="stage-lead">
+          From your first appointment to your final results - we walk with you
+          every step of the way.
         </p>
       </div>
 
-      {/* ── Cards ── */}
       <div
-        className="stage-track relative z-10 flex w-full"
-        style={{ maxWidth: 1280, height: 460, gap: 0 }}
+        className="stage-track"
+        ref={trackRef}
+        onScroll={handleStageScroll}
       >
         {stages.map((stage, idx) => (
           <div
             key={stage.id}
             className="stage-card"
-            onMouseEnter={() => setHovered(stage.id)}
-            onMouseLeave={() => setHovered(null)}
+            ref={(el) => {
+              cardRefs.current[idx] = el;
+            }}
           >
-            {/* Always-on brand top bar */}
-            <div className="top-bar" />
+            <div className="stage-image">
+              <img src={stage.image} alt={stage.title} />
+              <div className="step-num">{stage.number}</div>
+            </div>
 
-            {/* Image — ALWAYS shown */}
-            <div
-              className="card-img"
-              style={{ backgroundImage: `url(${stage.image})` }}
-            />
-
-            {/* Permanent dark-to-bottom scrim — guarantees text readability */}
-            <div className="card-scrim" />
-
-            {/* Step number top-left */}
-            <div className="step-num">{stage.number}</div>
-
-            {/* Connector between cards */}
             {idx < stages.length - 1 && <div className="connector" />}
 
-            {/* Content block */}
             <div className="card-content">
               <span className="card-emoji">{stage.emoji}</span>
               <h3 className="card-title">{stage.title}</h3>
@@ -390,7 +488,38 @@ export default function ConsultationStages() {
         ))}
       </div>
 
-      {/* ── CTA strip ── */}
+      <div className="stage-carousel-controls" aria-label="Consultation stages carousel controls">
+        <button
+          type="button"
+          className="stage-carousel-btn"
+          aria-label="Previous consultation stage"
+          onClick={() => goToStage(activeStage - 1)}
+        >
+          ‹
+        </button>
+        <div className="stage-carousel-dots">
+          {stages.map((stage, index) => (
+            <button
+              key={stage.id}
+              type="button"
+              className={`stage-carousel-dot ${
+                activeStage === index ? "is-active" : ""
+              }`}
+              aria-label={`Show ${stage.title}`}
+              onClick={() => goToStage(index)}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          className="stage-carousel-btn"
+          aria-label="Next consultation stage"
+          onClick={() => goToStage(activeStage + 1)}
+        >
+          ›
+        </button>
+      </div>
+
       <div className="stage-cta-strip relative z-10 max-sm:mt-5 mt-10 flex items-center gap-4">
         <div className="h-px w-16" style={{ background: "linear-gradient(to right, transparent, rgba(51,78,155,0.4))" }} />
         <button
@@ -404,10 +533,11 @@ export default function ConsultationStages() {
             clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
           }}
         >
-         Book Your Consultation
+         Book your Free Consultation
         </button>
         <div className="h-px w-16" style={{ background: "linear-gradient(to left, transparent, rgba(51,78,155,0.4))" }} />
       </div>
     </div>
   );
 }
+

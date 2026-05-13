@@ -13,7 +13,7 @@ const treatmentCategories = [
     treatments: [
       ["PRP (Platelet-Rich Plasma)", "Stimulates natural hair growth using your own blood plasma."],
       ["GFC (Growth Factor Concentrate)", "Advanced therapy that boosts hair strength and density."],
-      ["Hair Transplant", "Permanent solution to restore hair in bald or thinning areas."],
+      [" UV light Therapy", "Permanent solution to restore hair in bald or thinning areas."],
       ["Hair Regrowth Treatments", "Non-surgical treatments to reduce hair fall and improve thickness."],
       ["Dandruff & Scalp Treatment", "Treats scalp infections, itching, and flaking issues."],
       ["Hair Patch / Cosmetic Hair System", "Instant solution for visible hair loss without surgery."],
@@ -30,7 +30,7 @@ const treatmentCategories = [
       "Personalized treatments to enhance skin glow, clarity, and overall appearance.",
     treatments: [
       ["Hydrafacial / Glow Facial", "Deep cleansing facial for instant glow and hydration."],
-      ["Acne & Acne Scar Treatment", "Reduces pimples and improves skin texture."],
+      ["Acne & Scar Treatment", "Reduces pimples and improves skin texture."],
       ["Pigmentation & Tan Removal", "Evens skin tone and reduces dark patches."],
       ["Chemical Peel", "Removes dead skin and improves brightness and texture."],
       ["Laser Hair Reduction", "Long-term solution for unwanted body hair."],
@@ -62,7 +62,7 @@ const treatmentCategories = [
 
 export default function TreatmentShowcase() {
   return (
-    <section id="process" className="tg-section">
+    <section className="tg-section">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
 
@@ -70,37 +70,13 @@ export default function TreatmentShowcase() {
           position: relative;
           overflow: hidden;
           padding: 26px 24px;
-          background:
-            radial-gradient(circle at 16% 20%, rgba(239,51,64,0.08), transparent 32%),
-            radial-gradient(circle at 84% 16%, rgba(51,78,155,0.1), transparent 34%),
-            linear-gradient(180deg, #f8fbff 0%, #eef3ff 48%, #ffffff 100%);
+          background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 48%, #ffffff 100%);
           color: #fff;
           font-family: 'DM Sans', sans-serif;
         }
 
-        .tg-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(51,78,155,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.04) 1px, transparent 1px);
-          background-size: 62px 62px;
-          mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-        }
-
-        .tg-section::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0.08;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
-          background-size: 210px 210px;
-        }
-
         .tg-wrap {
+          
           position: relative;
           z-index: 1;
           max-width: 1320px;
@@ -108,16 +84,16 @@ export default function TreatmentShowcase() {
         }
 
         .tg-head {
-          display: grid;
-          grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.55fr);
-          gap: 44px;
-          align-items: end;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           margin-bottom: 10px;
         }
 
         .tg-kicker {
+        
           width: fit-content;
-          margin-bottom: 18px;
+          margin: 0 auto 18px;
           padding: 7px 14px;
           border: 1px solid rgba(239,51,64,0.3);
           background: rgba(239,51,64,0.08);
@@ -319,43 +295,6 @@ export default function TreatmentShowcase() {
           font-size: 12.5px;
           line-height: 1.62;
         }
-
-        .tg-footer {
-          display: grid;
-          grid-template-columns: 1fr auto;
-          gap: 24px;
-          align-items: center;
-          margin-top: 28px;
-          padding: 24px 28px;
-          border: 1px solid rgba(239,51,64,0.14);
-          background: rgba(255,255,255,0.78);
-        }
-
-        .tg-footer p {
-          margin: 0;
-          color: rgba(51,65,85,0.72);
-          font-size: 13px;
-          line-height: 1.7;
-        }
-
-        .tg-cta {
-          border: 0;
-          cursor: pointer;
-          padding: 14px 30px;
-          clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-          background: linear-gradient(135deg, #EF3340, #334E9B);
-          color: #fff;
-          font-size: 12px;
-          font-weight: 900;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          white-space: nowrap;
-          transition: filter 0.2s ease, transform 0.16s ease;
-        }
-
-        .tg-cta:hover { filter: brightness(1.1); }
-        .tg-cta:active { transform: scale(0.98); }
-
         @media (max-width: 1100px) {
           .tg-section {
             padding: 84px 24px;
@@ -397,20 +336,12 @@ export default function TreatmentShowcase() {
           .tg-item {
             min-height: auto;
           }
-
-          .tg-footer {
-            grid-template-columns: 1fr;
-          }
-
-          .tg-cta {
-            width: 100%;
-          }
         }
       `}</style>
 
       <div className="tg-wrap">
         <div className="tg-head">
-          <div>
+          <div >
             <div className="tg-kicker">Our Treatments</div>
           </div>
         </div>
@@ -449,19 +380,6 @@ export default function TreatmentShowcase() {
               </div>
             </article>
           ))}
-        </div>
-
-        <div className="tg-footer">
-          <p>
-            Every treatment begins with consultation, diagnosis, and a clear plan
-            before procedures or therapies are recommended.
-          </p>
-          <button
-            className="tg-cta"
-            onClick={() => window.dispatchEvent(new Event("open-booking-modal"))}
-          >
-            Book Your Consultation
-          </button>
         </div>
       </div>
     </section>

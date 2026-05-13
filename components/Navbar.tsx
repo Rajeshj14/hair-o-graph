@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, type ReactNode } from "react";
-import { X } from "lucide-react";
+import { PhoneCall, X } from "lucide-react";
 
 type BookingModalProps = {
   isOpen: boolean;
@@ -37,7 +37,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "#" },
     { name: "About Us", href: "#about" },
-    { name: "Our Team", href: "#our-team" },
+    { name: "Doctor", href: "#doctor" },
     { name: "Process", href: "#process" },
     { name: "Treatments", href: "#treatments" },
     // { name: "Contact Us", href: "#contact" },
@@ -101,12 +101,11 @@ export default function Navbar() {
           </div>
 
           {/* CTA Button - Hidden on Mobile/Tablet, Visible on Desktop */}
-          <button
-            type="button"
-            onClick={openBookingForm}
+          <a
+            href="tel:+91744866675"
             className="hidden lg:inline-flex items-center justify-center cursor-pointer
                        bg-gradient-to-br from-[#EF3340] to-[#334E9B]
-                       text-white px-7 py-3
+                       text-white px-7 gap-2 py-3
                        font-bold text-[12px] tracking-[0.08em] uppercase
                        border-0 shadow-md transition-all duration-200
                        hover:brightness-110 active:scale-[0.98]"
@@ -114,8 +113,9 @@ export default function Navbar() {
               clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
             }}
           >
-            Book Your Consultation
-          </button>
+            <PhoneCall size={17} strokeWidth={2.2} /> 
+                 +91744866675
+          </a>
 
           {/* Mobile Menu Button - Visible only on Mobile/Tablet */}
           <button
@@ -164,9 +164,9 @@ export default function Navbar() {
             </a>
           ))}
 
-          <button
+          <a
             type="button"
-            className="mt-3 w-full inline-flex items-center justify-center cursor-pointer
+            className="mt-3 w-full inline-flex gap-2 items-center justify-center cursor-pointer
                        bg-gradient-to-br from-[#EF3340] to-[#334E9B]
                        text-white px-7 py-3.5
                        font-bold text-[12px] tracking-[0.08em] uppercase
@@ -175,10 +175,12 @@ export default function Navbar() {
             style={{
               clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
             }}
+            href="tel:+91744866675"
             onClick={openBookingForm}
           >
-            Book Your Consultation
-          </button>
+             <PhoneCall size={17} strokeWidth={2.2} /> 
+                 +91744866675
+          </a>
         </div>
       </div>
 

@@ -33,84 +33,67 @@ export default function WhyChooseTreatments() {
           position: relative;
           overflow: hidden;
           padding: 50px 24px;
-          background:
-            radial-gradient(circle at 18% 26%, rgba(239,51,64,0.08), transparent 30%),
-            radial-gradient(circle at 84% 18%, rgba(51,78,155,0.12), transparent 34%),
-            linear-gradient(180deg, #ffffff 0%, #eef3ff 52%, #f8fbff 100%);
+          background: linear-gradient(180deg, #ffffff 0%, #eef3ff 52%, #f8fbff 100%);
           color: #111827;
           font-family: 'DM Sans', sans-serif;
         }
-        .why-sections {
-          font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(40px, 5vw, 64px);
-          font-weight: 900;
-          line-height: 0.96;
-          letter-spacing: 0;
-        }
-
-        .why-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(51,78,155,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.032) 1px, transparent 1px);
-          background-size: 64px 64px;
-          mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
-        }
-
         .why-wrap {
           position: relative;
           z-index: 1;
           max-width: 1240px;
           margin: 0 auto;
-          display: grid;
-          grid-template-columns: minmax(300px, 0.48fr) minmax(0, 1fr);
-          gap: 40px;
-          align-items: stretch;
         }
 
         .why-intro {
-          position: sticky;
-          top: 96px;
-          align-self: start;
-          min-height: 420px;
-          padding: 34px;
-          border: 1px solid rgba(239,51,64,0.18);
-          background:
-            linear-gradient(145deg, rgba(255,255,255,0.96), rgba(242,246,255,0.94));
-          overflow: hidden;
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          margin: 0 auto 40px;
+          text-align: center;
         }
 
         .why-intro::after {
           content: '';
-          position: absolute;
-          inset: auto -20% -28% -20%;
-          height: 220px;
-          background: radial-gradient(circle, rgba(51,78,155,0.34), transparent 66%);
-          pointer-events: none;
+          display: block;
+          width: 74px;
+          height: 2px;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
         }
 
         .why-kicker {
-          width: fit-content;
-          margin-bottom: 18px;
-          padding: 7px 14px;
-          border: 1px solid rgba(239,51,64,0.32);
-          background: rgba(239,51,64,0.08);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
           color: #EF3340;
           font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.18em;
+          font-weight: 900;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
         }
 
+        .why-kicker::before,
+        .why-kicker::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .why-kicker::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
+        }
+
         .why-title {
-          margin: 0;
+          margin: 0 0 14px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(40px, 5vw, 64px);
+          font-size: clamp(30px, 3.4vw, 44px);
           font-weight: 900;
-          line-height: 0.96;
+          line-height: 1.12;
           letter-spacing: 0;
         }
 
@@ -122,17 +105,22 @@ export default function WhyChooseTreatments() {
         .why-copy {
           position: relative;
           z-index: 1;
-          margin: 24px 0 0;
-          max-width: 360px;
+          margin: 0 auto;
+          max-width: 540px;
           color: rgba(51,65,85,0.72);
-          font-size: 14px;
-          line-height: 1.8;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.74;
         }
 
         .why-list {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 16px;
+        }
+
+        .why-card-clone {
+          display: none;
         }
 
         .why-card {
@@ -224,19 +212,11 @@ export default function WhyChooseTreatments() {
           }
 
           .why-wrap {
-            grid-template-columns: 1fr;
-                gap:20px;
-          }
-
-          .why-intro {
-            position: relative;
-            top: auto;
-            min-height: auto;
+            max-width: 760px;
           }
 
           .why-copy {
-            max-width: 720px;
-            margin: 15px 0 0;
+            max-width: 540px;
           }
         }
 
@@ -249,12 +229,50 @@ export default function WhyChooseTreatments() {
           }
 
           .why-list {
-            grid-template-columns: 1fr;
+            display: flex;
+            width: max-content;
+            gap: 14px;
+            animation: whyMobileMarquee 34s linear infinite;
+            will-change: transform;
           }
 
-          .why-intro,
           .why-card {
+            flex: 0 0 min(82vw, 320px);
             padding: 24px;
+          }
+
+          .why-card:hover {
+            transform: none;
+          }
+
+          .why-card-clone {
+            display: block;
+          }
+
+          .why-list:hover {
+            animation-play-state: paused;
+          }
+
+          .why-intro {
+            max-width: 360px;
+            margin-bottom: 30px;
+          }
+
+          .why-title {
+            font-size: 29px;
+          }
+
+          .why-copy {
+            font-size: 13.5px;
+          }
+
+          @keyframes whyMobileMarquee {
+            from {
+              transform: translateX(calc(-50% - 7px));
+            }
+            to {
+              transform: translateX(0);
+            }
           }
         }
       `}</style>
@@ -274,6 +292,18 @@ export default function WhyChooseTreatments() {
         <div className="why-list">
           {reasons.map((reason) => (
             <article className="why-card" key={reason.id}>
+              <span className="why-id">{reason.id}</span>
+              <h3>{reason.title}</h3>
+              <p>{reason.text}</p>
+              <span className="why-mark">+</span>
+            </article>
+          ))}
+          {reasons.map((reason) => (
+            <article
+              className="why-card why-card-clone"
+              key={`${reason.id}-clone`}
+              aria-hidden="true"
+            >
               <span className="why-id">{reason.id}</span>
               <h3>{reason.title}</h3>
               <p>{reason.text}</p>

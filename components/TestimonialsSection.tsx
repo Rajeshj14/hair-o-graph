@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+
 const testimonials = [
   {
     name: "Shanthi",
@@ -46,6 +48,38 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  const goToTestimonial = (index: number) => {
+    const nextIndex = (index + testimonials.length) % testimonials.length;
+    setActiveTestimonial(nextIndex);
+    cardRefs.current[nextIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  };
+
+  const handleTestimonialScroll = () => {
+    if (!trackRef.current) return;
+
+    const trackLeft = trackRef.current.getBoundingClientRect().left;
+    const closestIndex = cardRefs.current.reduce((closest, card, index) => {
+      if (!cardRefs.current[closest] || !card) return closest;
+      const currentDistance = Math.abs(
+        card.getBoundingClientRect().left - trackLeft
+      );
+      const closestDistance = Math.abs(
+        cardRefs.current[closest]!.getBoundingClientRect().left - trackLeft
+      );
+      return currentDistance < closestDistance ? index : closest;
+    }, 0);
+
+    setActiveTestimonial(closestIndex);
+  };
+
   return (
     <section className="testimonials-section">
       <style>{`
@@ -55,24 +89,9 @@ export default function TestimonialsSection() {
           position: relative;
           overflow: hidden;
           padding: 50px 24px;
-          background:
-            radial-gradient(circle at 14% 18%, rgba(239,51,64,0.08), transparent 32%),
-            radial-gradient(circle at 86% 20%, rgba(51,78,155,0.12), transparent 36%),
-            linear-gradient(180deg, #f8fbff 0%, #eef3ff 46%, #ffffff 100%);
+          background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 46%, #ffffff 100%);
           color: #111827;
           font-family: 'DM Sans', sans-serif;
-        }
-
-        .testimonials-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image:
-            linear-gradient(rgba(51,78,155,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(239,51,64,0.03) 1px, transparent 1px);
-          background-size: 68px 68px;
-          mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
         }
 
         .testimonials-wrap {
@@ -83,33 +102,55 @@ export default function TestimonialsSection() {
         }
 
         .testimonials-head {
-          display: grid;
-          grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.55fr);
-          gap: 40px;
-          align-items: end;
-          margin-bottom: 46px;
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          margin: 0 auto 40px;
+          text-align: center;
+        }
+
+        .testimonials-head::after {
+          content: '';
+          display: block;
+          width: 74px;
+          height: 2px;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
         }
 
         .testimonials-kicker {
-          width: fit-content;
-          margin-bottom: 18px;
-          padding: 7px 14px;
-          border: 1px solid rgba(239,51,64,0.32);
-          background: rgba(239,51,64,0.08);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
           color: #EF3340;
           font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.18em;
+          font-weight: 900;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
         }
 
+        .testimonials-kicker::before,
+        .testimonials-kicker::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .testimonials-kicker::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
+        }
+
         .testimonials-title {
-          margin: 0;
-          max-width: 740px;
+          margin: 0 0 14px;
           font-family: 'Playfair Display', Georgia, serif;
-          font-size: clamp(40px, 5vw, 64px);
+          font-size: clamp(30px, 3.4vw, 44px);
           font-weight: 900;
-          line-height: 0.94;
+          line-height: 1.12;
           letter-spacing: 0;
         }
 
@@ -119,19 +160,31 @@ export default function TestimonialsSection() {
         }
 
         .testimonials-lead {
-          margin: 0;
+          max-width: 540px;
+          margin: 0 auto;
           color: rgba(51,65,85,0.72);
-          font-size: 14px;
-          line-height: 1.85;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.74;
         }
 
         .testimonial-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          display: flex;
           gap: 18px;
+          overflow-x: auto;
+          padding: 2px 2px 18px;
+          scroll-snap-type: x mandatory;
+          scroll-padding-left: 2px;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+
+        .testimonial-grid::-webkit-scrollbar {
+          display: none;
         }
 
         .testimonial-card {
+          flex: 0 0 calc((100% - 36px) / 3);
           position: relative;
           min-height: 310px;
           padding: 26px;
@@ -139,6 +192,7 @@ export default function TestimonialsSection() {
           background:
             linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,248,255,0.9));
           overflow: hidden;
+          scroll-snap-align: start;
           transition: transform 0.26s ease, border-color 0.26s ease, background 0.26s ease;
         }
 
@@ -243,34 +297,57 @@ export default function TestimonialsSection() {
           line-height: 1.78;
         }
 
-        .testimonial-footer {
-          display: grid;
-          grid-template-columns: 1fr auto;
-          gap: 20px;
+        .testimonial-carousel-controls {
+          display: flex;
           align-items: center;
-          margin-top: 28px;
-          padding: 22px 26px;
-          border: 1px solid rgba(239,51,64,0.14);
-          background: rgba(255,255,255,0.78);
+          justify-content: center;
+          gap: 16px;
+          margin-top: 12px;
         }
 
-        .testimonial-footer p {
-          margin: 0;
-          color: rgba(51,65,85,0.72);
-          font-size: 13px;
-          line-height: 1.7;
+        .testimonial-carousel-btn {
+          width: 40px;
+          height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(51,78,155,0.18);
+          border-radius: 999px;
+          background: #ffffff;
+          color: #334E9B;
+          font-size: 22px;
+          line-height: 1;
+          cursor: pointer;
+          box-shadow: 0 12px 28px rgba(31,45,83,0.08);
+          transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
         }
 
-        .rating-chip {
+        .testimonial-carousel-btn:hover {
+          transform: translateY(-2px);
+          border-color: rgba(239,51,64,0.35);
+          color: #EF3340;
+        }
+
+        .testimonial-carousel-dots {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 11px 14px;
-          border: 1px solid rgba(239,51,64,0.28);
-          color: #EF3340;
-          font-size: 12px;
-          font-weight: 900;
-          white-space: nowrap;
+        }
+
+        .testimonial-carousel-dot {
+          width: 8px;
+          height: 8px;
+          border: 0;
+          padding: 0;
+          border-radius: 999px;
+          background: rgba(51,78,155,0.24);
+          cursor: pointer;
+          transition: width 0.2s ease, background 0.2s ease;
+        }
+
+        .testimonial-carousel-dot.is-active {
+          width: 24px;
+          background: #EF3340;
         }
 
         @media (max-width: 1060px) {
@@ -279,12 +356,11 @@ export default function TestimonialsSection() {
           }
 
           .testimonials-head {
-            grid-template-columns: 1fr;
-            gap: 22px;
+            max-width: 600px;
           }
 
-          .testimonial-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .testimonial-card {
+            flex-basis: calc((100% - 18px) / 2);
           }
         }
 
@@ -293,30 +369,22 @@ export default function TestimonialsSection() {
             padding: 30px 16px;
           }
           .testimonials-head {
-            gap: 7px;
-            margin-bottom: 20px;
+            max-width: 360px;
+            margin-bottom: 30px;
+          }
+
+          .testimonials-title {
+            font-size: 29px;
+          }
+
+          .testimonials-lead {
+            font-size: 13.5px;
           }
           .testimonial-grid {
-            display: flex;
             gap: 14px;
             margin: 0 -16px;
             padding: 0 16px 12px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
             scroll-padding-left: 16px;
-            -webkit-overflow-scrolling: touch;
-          }
-
-          .testimonial-grid::-webkit-scrollbar {
-            height: 4px;
-          }
-
-          .testimonial-grid::-webkit-scrollbar-track {
-            background: rgba(51,78,155,0.08);
-          }
-
-          .testimonial-grid::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #EF3340, #334E9B);
           }
 
           .testimonial-card {
@@ -330,8 +398,15 @@ export default function TestimonialsSection() {
             transform: none;
           }
 
-          .testimonial-footer {
-            grid-template-columns: 1fr;
+          .testimonial-carousel-controls {
+            gap: 13px;
+            margin-top: 6px;
+          }
+
+          .testimonial-carousel-btn {
+            width: 34px;
+            height: 34px;
+            font-size: 18px;
           }
         }
       `}</style>
@@ -350,10 +425,20 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="testimonial-grid">
-          {testimonials.map((item) => (
-            <article className="testimonial-card" key={`${item.name}-${item.tag}`}>
-              <div className="quote-mark">"</div>
+        <div
+          className="testimonial-grid"
+          ref={trackRef}
+          onScroll={handleTestimonialScroll}
+        >
+          {testimonials.map((item, index) => (
+            <article
+              className="testimonial-card"
+              key={`${item.name}-${item.tag}`}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+            >
+              <div className="quote-mark">&quot;</div>
               <div className="testimonial-meta">
                 <div className="avatar">{item.name.slice(0, 2).toUpperCase()}</div>
                 <div>
@@ -367,12 +452,39 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        <div className="testimonial-footer">
-          <p>
-            Reviews reflect real patient journeys shared after consultation and
-            treatment experience at Hair O Graft.
-          </p>
-          <div className="rating-chip">4.7 Star Patient Trust</div>
+        <div
+          className="testimonial-carousel-controls"
+          aria-label="Testimonials carousel controls"
+        >
+          <button
+            type="button"
+            className="testimonial-carousel-btn"
+            aria-label="Previous testimonial"
+            onClick={() => goToTestimonial(activeTestimonial - 1)}
+          >
+            ‹
+          </button>
+          <div className="testimonial-carousel-dots">
+            {testimonials.map((item, index) => (
+              <button
+                key={`${item.name}-${item.tag}-dot`}
+                type="button"
+                className={`testimonial-carousel-dot ${
+                  activeTestimonial === index ? "is-active" : ""
+                }`}
+                aria-label={`Show ${item.name} testimonial`}
+                onClick={() => goToTestimonial(index)}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="testimonial-carousel-btn"
+            aria-label="Next testimonial"
+            onClick={() => goToTestimonial(activeTestimonial + 1)}
+          >
+            ›
+          </button>
         </div>
       </div>
     </section>
