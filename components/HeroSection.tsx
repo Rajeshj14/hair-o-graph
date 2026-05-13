@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 const bgImages = [
   "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=1800&q=80",
@@ -18,6 +18,10 @@ const stats = [
 
 export default function ClinicHero() {
   const [currentBg, setCurrentBg] = useState(0);
+  const [submissionState, setSubmissionState] = useState<{
+    status: "idle" | "submitting" | "success" | "error";
+    message: string;
+  }>({ status: "idle", message: "" });
   const bgRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -41,9 +45,52 @@ export default function ClinicHero() {
     });
   }, [currentBg]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.location.href = "/thank-you";
+    setSubmissionState({ status: "submitting", message: "" });
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const appointmentDateTime = String(formData.get("appointmentDateTime") ?? "").trim();
+    const concern = String(formData.get("treatment") ?? "").trim() || "Not specified";
+    const pageUrl = window.location.href;
+    const source = "Hero Form";
+
+    try {
+      const response = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source,
+          name,
+          phone,
+          email,
+          appointmentDateTime,
+          concern,
+          condition: concern,
+          pageUrl,
+          url: pageUrl,
+        }),
+      });
+
+      const responseData = await response.json().catch(() => ({}));
+      if (!response.ok || !responseData?.success) {
+        throw new Error(responseData?.error || responseData?.excelError || "Submission failed");
+      }
+
+      setSubmissionState({
+        status: "success",
+        message: "Your appointment request was submitted successfully.",
+      });
+      form.reset();
+      window.location.assign("/thank-you");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setSubmissionState({ status: "error", message: message || "Submission failed." });
+    }
   };
 
   return (
@@ -604,6 +651,18 @@ export default function ClinicHero() {
                  Restore Your Confidence. Enhance Your Look. Feel Your Best.
               </p>
 
+              {submissionState.status !== "idle" && (
+                <div
+                  className={
+                    submissionState.status === "success"
+                      ? "mb-3 text-sm text-green-700"
+                      : "mb-3 text-sm text-red-700"
+                  }
+                >
+                  {submissionState.message}
+                </div>
+              )}
+
               <div className="form-grid">
                 <input
                   className="hero-field"
@@ -646,8 +705,12 @@ export default function ClinicHero() {
                 />
               </div>
 
-              <button className="form-submit" type="submit">
-                Submit Request
+              <button
+                className="form-submit"
+                type="submit"
+                disabled={submissionState.status === "submitting"}
+              >
+                {submissionState.status === "submitting" ? "Submitting..." : "Submit Request"}
               </button>
             </form>
           </div>

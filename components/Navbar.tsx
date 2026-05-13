@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { PhoneCall, X } from "lucide-react";
 
 type BookingModalProps = {
@@ -33,6 +33,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [submissionState, setSubmissionState] = useState<{
+    status: "idle" | "submitting" | "success" | "error";
+    message: string;
+  }>({ status: "idle", message: "" });
 
   const navLinks = [
     { name: "Home", href: "#" },
@@ -51,19 +55,68 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("open-booking-modal", openBookingForm);
-    return () => window.removeEventListener("open-booking-modal", openBookingForm);
-  }, []);
-
   // Close mobile menu when clicking a link
   const handleLinkClick = () => {
     setOpen(false);
   };
 
-  const openBookingForm = () => {
+  const openBookingForm = useCallback(() => {
     setOpen(false);
+    setSubmissionState({ status: "idle", message: "" });
     setIsBookingModalOpen(true);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("open-booking-modal", openBookingForm);
+    return () => window.removeEventListener("open-booking-modal", openBookingForm);
+  }, [openBookingForm]);
+
+  const handleBookingSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmissionState({ status: "submitting", message: "" });
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const appointmentDateTime = String(formData.get("appointmentDateTime") ?? "").trim();
+    const concern = String(formData.get("treatment") ?? "").trim() || "Not specified";
+    const pageUrl = window.location.href;
+    const source = "Pop-up Form";
+
+    try {
+      const response = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          source,
+          name,
+          phone,
+          email,
+          appointmentDateTime,
+          concern,
+          condition: concern,
+          pageUrl,
+          url: pageUrl,
+        }),
+      });
+
+      const responseData = await response.json().catch(() => ({}));
+      if (!response.ok || !responseData?.success) {
+        throw new Error(responseData?.error || responseData?.excelError || "Submission failed");
+      }
+
+      setSubmissionState({
+        status: "success",
+        message: "Your appointment request was submitted successfully.",
+      });
+      form.reset();
+      window.location.assign("/thank-you");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setSubmissionState({ status: "error", message: message || "Submission failed." });
+    }
   };
 
   return (
@@ -190,7 +243,7 @@ export default function Navbar() {
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
       >
-        <form className="p-6 sm:p-8">
+        <form className="p-6 sm:p-8" onSubmit={handleBookingSubmit}>
           <div className="mb-7 pr-10">
             <div className="mb-3 inline-flex px-3 py-1.5 border border-[#EF3340]/25 bg-[#EF3340]/8 text-[#EF3340] text-[10px] font-extrabold tracking-[0.18em] uppercase">
               Appointment Form
@@ -203,9 +256,21 @@ export default function Navbar() {
             </p>
           </div>
 
+          {submissionState.status !== "idle" && (
+            <div
+              className={
+                submissionState.status === "success"
+                  ? "mb-3 text-sm text-green-700"
+                  : "mb-3 text-sm text-red-700"
+              }
+            >
+              {submissionState.message}
+            </div>
+          )}
+
           <div className="grid gap-4 sm:grid-cols-2">
-            <input className="booking-field" name="name" placeholder="Name" type="text" />
-            <input className="booking-field" name="phone" placeholder="Phone" type="tel" />
+            <input className="booking-field" name="name" placeholder="Name" type="text" required />
+            <input className="booking-field" name="phone" placeholder="Phone" type="tel" required />
             <input className="booking-field sm:col-span-2" name="email" placeholder="Email" type="email" />
             <select className="booking-field" name="treatment" defaultValue="">
               <option value="" disabled>Treatment</option>
@@ -233,8 +298,9 @@ export default function Navbar() {
             style={{
               clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
             }}
+            disabled={submissionState.status === "submitting"}
           >
-            Submit
+            {submissionState.status === "submitting" ? "Submitting..." : "Submit"}
           </button>
         </form>
       </BookingModal>

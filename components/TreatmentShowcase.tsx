@@ -69,7 +69,7 @@ export default function TreatmentShowcase() {
         .tg-section {
           position: relative;
           overflow: hidden;
-          padding: 26px 24px;
+          padding: 76px 24px;
           background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 48%, #ffffff 100%);
           color: #fff;
           font-family: 'DM Sans', sans-serif;
@@ -93,7 +93,7 @@ export default function TreatmentShowcase() {
         .tg-kicker {
         
           width: fit-content;
-          margin: 0 auto 18px;
+          margin: 0 auto 35px;
           padding: 7px 14px;
           border: 1px solid rgba(239,51,64,0.3);
           background: rgba(239,51,64,0.08);

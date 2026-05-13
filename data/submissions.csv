@@ -1,0 +1,8 @@
+Timestamp,Source,Name,Phone,Email,Appointment DateTime,Condition,URL,TeleCRM
+"13/5/2026, 5:32:34 pm",Navbar Booking Modal,testing1,1425367890,testing@gmail.com,2026-05-13T21:32,Aligners / Smile Correction,http://localhost:3000/?name=testing1&phone=3201456987&email=fastestdigitalmarketing8%40gmail.com&treatment=Pigmentation+%2F+Glow+Treatment&appointmentDateTime=2026-05-14T17%3A32,Not configured
+"13/5/2026, 5:35:15 pm",Navbar Booking Modal,testing1,1425367890,johnroserajesh@gmail.com,2026-05-13T17:40,Dental Pain / RCT,http://localhost:3000/,Not configured
+"13/5/2026, 5:42:27 pm",Hero Form Debug,Hero Test,9876543211,hero@example.com,2026-05-13T17:00,PRP / GFC,http://127.0.0.1:3000,Not configured
+"13/5/2026, 5:43:21 pm",Hero Form,Hero UI Equivalent,9876543212,hero-ui@example.com,2026-05-13T18:00,Acne / Skin Treatment,http://127.0.0.1:3000,Not configured
+"13/5/2026, 5:45:51 pm",Navbar Booking Modal,rajesh kumar,7412580300,johnroserajesh@gmail.com,2026-05-14T17:45,Pigmentation / Glow Treatment,http://localhost:3000/?name=testing1&phone=7854120369&email=paul%40gmail.com&treatment=Aligners+%2F+Smile+Correction&appointmentDateTime=2026-05-27T17%3A39,Not configured
+"13/5/2026, 5:46:48 pm",Hero Form,rajesh kumarfg,1425367800,hari@gmail.com,2026-05-22T17:46,Acne / Skin Treatment,http://localhost:3000/,Not configured
+"13/5/2026, 5:51:48 pm",Pop-up Form,fenil,7859641230,testing@gmail.com,2026-05-13T22:51,Aligners / Smile Correction,http://localhost:3000/,Not configured

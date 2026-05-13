@@ -8,12 +8,12 @@ export default function ThankYouPage() {
         <div className="w-full border border-[#334E9B]/15 bg-white/90 shadow-2xl shadow-[#334E9B]/10 backdrop-blur">
           <div className="grid overflow-hidden lg:grid-cols-[1fr_0.85fr]">
             <div className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14">
-              <div className="mb-6 inline-flex items-center gap-2 border border-[#EF3340]/20 bg-[#EF3340]/8 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EF3340]">
+              <div className="mb-2 inline-flex items-center gap-2 border border-[#EF3340]/20 bg-[#EF3340]/8 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EF3340]">
                 <CheckCircle2 size={16} />
                 Request Received
               </div>
 
-              <h1 className="font-serif text-[clamp(40px,5vw,64px)] font-black leading-tight text-[#111827]">
+              <h1 className="font-serif text-[clamp(30px,3vw,48px)] font-black text-[#111827]">
                 Thank you for reaching out.
               </h1>
 
@@ -22,30 +22,6 @@ export default function ThankYouPage() {
                 clinic team will review your details and contact you shortly to
                 confirm the next available appointment slot.
               </p>
-
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="border border-[#334E9B]/15 bg-[#f8fbff] p-5">
-                  <CalendarCheck className="mb-4 text-[#EF3340]" size={28} />
-                  <h2 className="text-sm font-black uppercase tracking-[0.12em] text-[#111827]">
-                    Next Step
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    Keep your phone available so our care coordinator can
-                    confirm your appointment details.
-                  </p>
-                </div>
-
-                <div className="border border-[#334E9B]/15 bg-[#f8fbff] p-5">
-                  <PhoneCall className="mb-4 text-[#334E9B]" size={28} />
-                  <h2 className="text-sm font-black uppercase tracking-[0.12em] text-[#111827]">
-                    Need Help?
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    For urgent changes, contact the clinic directly and mention
-                    your submitted appointment request.
-                  </p>
-                </div>
-              </div>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link

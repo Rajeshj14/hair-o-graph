@@ -286,9 +286,7 @@ export default function PrivacyPolicyPage() {
             <div className="pp-contact-text">
               <h3>Questions About This Policy?</h3>
               <p>
-                Reach out to our team at{" "}
-                <strong>Hair O Graft, Ambattur, Chennai</strong>.
-                <br />
+
                 Phone: +91 744866675
               </p>
             </div>

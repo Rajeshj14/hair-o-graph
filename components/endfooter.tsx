@@ -7,10 +7,7 @@ export default function EndFooter() {
         <p className="text-center leading-6 sm:text-left">
           Copyright {new Date().getFullYear()}{" "}
           <span className="font-extrabold text-[#111827]">Hair O Graft</span>.
-          All rights reserved | Powered by{" "}
-          <span className="font-bold text-[#334E9B]">
-            GrowMedico Developers
-          </span>
+          All rights reserved.
         </p>
 
         <a
