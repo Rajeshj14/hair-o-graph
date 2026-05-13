@@ -94,9 +94,9 @@ export default function HemashreeCertificate() {
           Meet Our {" "}
           <span>Expert</span>
         </h2>
-        <p className="doctor-lead">
+        {/* <p className="doctor-lead">
          Dr. E. Hema Shree  BDS | FMC, Aesthetic Practitioner & Cosmetology Specialist
-        </p>
+        </p> */}
       </div>
 
       <div className="relative mx-auto grid max-w-6xl items-stretch gap-8 lg:grid-cols-2">
@@ -104,12 +104,12 @@ export default function HemashreeCertificate() {
 
 
           <h2 className="font-serif text-2xl font-black leading-tight text-[#111827] sm:text-2xl">
-          HAIR & SKIN-ALIGNED PROFILE,
+           Dr. E. Hema Shree BDS | FMC, Aesthetic Practitioner & Cosmetology Specialist
           </h2>
 
           <div className="mt-6 space-y-5 text-[15px] leading-8 text-slate-600">
             <p>
-              TDr. Hema Shree is a qualified aesthetic practitioner with 5+ years of clinical experience in Advanced skin, hair, and cosmetology treatments.
+              Qualified aesthetic practitioner with 5+ years of clinical experience in Advanced skin, hair, and cosmetology treatments.
             </p>
 
             <p>

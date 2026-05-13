@@ -25,7 +25,7 @@ const stages = [
     emoji: "",
     title: "Advanced Treatment",
     desc: "Experience safe and effective treatments using modern technology and proven methods.",
-    image: "/Advanced-Treatment.png",
+    image: "/AdvancedTreatment.png",
   },
   {
     id: 4,
@@ -449,7 +449,7 @@ export default function ConsultationStages() {
         <div className="stage-kicker">Stages of Consultation</div>
 
         <h2 className="stage-heading">
-          Your Journey to <span>Confidence</span>
+          Treatments <span>Journey</span>
         </h2>
 
         <p className="stage-lead">

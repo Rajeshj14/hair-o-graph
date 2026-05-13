@@ -294,7 +294,7 @@ export default function HairOGraftOverview() {
           </div>
 
           <div className="hog-usp">
-            <p className="hog-usp-title"> USP</p>
+            <p className="hog-usp-title"></p>
             {usps.map((item) => (
               <div className="hog-usp-card" key={item}>
                 <p>{item}</p>

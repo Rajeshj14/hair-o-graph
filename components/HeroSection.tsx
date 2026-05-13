@@ -11,9 +11,9 @@ const bgImages = [
 
 const stats = [
   { num: "1000+", label: "Happy Patients" },
-  { num: "4.7/5", label: "Google Rating" },
-  { num: "100%", label: "Certified Doctors " },
-  { num: "Safe", label: "Effective Treatments" },
+  { num: "Top", label: " Rated Clinic" },
+  { num: "100%", label: "Effective Treatments " },
+  // { num: "Safe", label: "Effective Treatments" },
 ];
 
 export default function ClinicHero() {
