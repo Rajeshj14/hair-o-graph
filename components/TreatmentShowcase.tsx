@@ -12,7 +12,7 @@ const treatmentCategories = [
       "Advanced solutions to control hair fall, restore growth, and improve scalp health.",
     treatments: [
       ["Advanced Hair Regrowth Therapy", "Stimulates natural hair growth using your own blood plasma."],
-      ["GFC (Growth Factor Concentrate)", "Advanced therapy that boosts hair strength and density."],
+      ["Natural Hair Support Therapy", "Advanced therapy that boosts hair strength and density."],
       [" UV light Therapy", "Permanent solution to restore hair in thinning areas."],
       ["Hair Regrowth Treatments", "Non-surgical treatments to reduce hair fall and improve thickness."],
       ["Dandruff & Scalp Treatment", "Treats scalp infections, itching, and flaking issues."],

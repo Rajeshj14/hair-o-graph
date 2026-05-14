@@ -14,8 +14,6 @@ const services = [
   "Hair Treatments",
   "Skin Treatments",
   "Dental Treatments",
-  "PRP & GFC",
-  "Aligners & Implants",
 ];
 
 export default function Footer() {
@@ -98,7 +96,7 @@ export default function Footer() {
           list-style: none;
         }
 
-        .footer-list a,
+        .footer-list p,
         .footer-list span {
           color: rgba(51,65,85,0.68);
           font-size: 13px;
@@ -236,7 +234,7 @@ export default function Footer() {
             <ul className="footer-list">
               {footerLinks.map((link) => (
                 <li key={link}>
-                  <a href="#">{link}</a>
+                  <p>{link}</p>
                 </li>
               ))}
             </ul>
@@ -263,10 +261,6 @@ export default function Footer() {
               <div className="contact-card">
                 <div className="contact-label">Location</div>
                 <div className="contact-value">256, New Military Rd, opposite to avadi corporation office, Nehru Bazaar, Thirumalai Rajapuram, Avadi, Chennai, Tamil Nadu 600054</div>
-              </div>
-              <div className="contact-card">
-                <div className="contact-label">Care</div>
-                <div className="contact-value">Hair, Skin & Dental Clinic</div>
               </div>
             </div>
           </div>

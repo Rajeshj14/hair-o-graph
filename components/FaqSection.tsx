@@ -34,9 +34,9 @@ const faqs = [
     ],
   },
   {
-    q: "Do you offer advanced treatments like PRP, GFC, Aligners, and Implants?",
+    q: "Do you offer advanced treatments like Hair ,Skin and Dental?",
     a: [
-      "Absolutely. We provide advanced and modern treatments including PRP, GFC, hair transplant, laser skin treatments, aligners, dental implants, and more.",
+      "Absolutely. We provide advanced and modern treatments including hair, skin and dental treatments, laser skin treatments, aligners, dental implants, and more.",
     ],
   },
   {
