@@ -8,11 +8,6 @@ const differentiators = [
   "Safe, Effective & Minimally Invasive Treatments",
 ];
 
-const usps = [
-  "Capacity to handle high patient flow efficiently",
-  "Advanced medical-grade equipment",
-  "Specialized experts in hair, skin & dental care",
-];
 
 const missions = [
   "Restore Confidence",
@@ -291,15 +286,6 @@ export default function HairOGraftOverview() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="hog-usp">
-            <p className="hog-usp-title"></p>
-            {usps.map((item) => (
-              <div className="hog-usp-card" key={item}>
-                <p>{item}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>

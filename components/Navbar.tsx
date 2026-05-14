@@ -33,6 +33,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [bookingAppointmentDateTime, setBookingAppointmentDateTime] = useState("");
   const [submissionState, setSubmissionState] = useState<{
     status: "idle" | "submitting" | "success" | "error";
     message: string;
@@ -112,6 +113,7 @@ export default function Navbar() {
         message: "Your appointment request was submitted successfully.",
       });
       form.reset();
+      setBookingAppointmentDateTime("");
       window.location.assign("/thank-you");
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -284,12 +286,21 @@ export default function Navbar() {
               <option>Aligners / Smile Correction</option>
               <option>Kids Dentistry</option>
             </select>
-            <input
-              className="booking-field "
-              name="appointmentDateTime"
-              placeholder="Appointment Date & Time"
-              type="datetime-local"
-            />
+            <div className="booking-date-wrap">
+              {!bookingAppointmentDateTime && (
+                <span className="booking-date-placeholder">Appointment Date</span>
+              )}
+              <input
+                className={`booking-field booking-date-field ${
+                  bookingAppointmentDateTime ? "" : "is-empty"
+                }`}
+                name="appointmentDateTime"
+                type="datetime-local"
+                aria-label="Appointment Date and Time"
+                value={bookingAppointmentDateTime}
+                onChange={(event) => setBookingAppointmentDateTime(event.target.value)}
+              />
+            </div>
           </div>
 
           <button
@@ -325,6 +336,33 @@ export default function Navbar() {
           border-color: rgba(239,51,64,0.55);
           background: #fff;
           box-shadow: 0 0 0 3px rgba(239,51,64,0.1);
+        }
+
+        .booking-date-wrap {
+          position: relative;
+        }
+
+        .booking-date-placeholder {
+          pointer-events: none;
+          position: absolute;
+          left: 14px;
+          top: 50%;
+          z-index: 1;
+          transform: translateY(-50%);
+          color: rgba(51,65,85,0.5);
+          font-size: 14px;
+        }
+
+        .booking-date-field.is-empty {
+          color: transparent;
+        }
+
+        .booking-date-field:focus {
+          color: #111827;
+        }
+
+        .booking-date-wrap:focus-within .booking-date-placeholder {
+          display: none;
         }
       `}</style>
     </>

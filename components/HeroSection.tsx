@@ -18,6 +18,7 @@ const stats = [
 
 export default function ClinicHero() {
   const [currentBg, setCurrentBg] = useState(0);
+  const [heroAppointmentDateTime, setHeroAppointmentDateTime] = useState("");
   const [submissionState, setSubmissionState] = useState<{
     status: "idle" | "submitting" | "success" | "error";
     message: string;
@@ -86,6 +87,7 @@ export default function ClinicHero() {
         message: "Your appointment request was submitted successfully.",
       });
       form.reset();
+      setHeroAppointmentDateTime("");
       window.location.assign("/thank-you");
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -410,6 +412,33 @@ export default function ClinicHero() {
           box-shadow: 0 0 0 3px rgba(239,51,64,0.1);
         }
 
+        .hero-date-wrap {
+          position: relative;
+        }
+
+        .hero-date-placeholder {
+          pointer-events: none;
+          position: absolute;
+          left: 14px;
+          top: 50%;
+          z-index: 1;
+          transform: translateY(-50%);
+          color: rgba(51,65,85,0.52);
+          font-size: 14px;
+        }
+
+        .hero-date-field.is-empty {
+          color: transparent;
+        }
+
+        .hero-date-field:focus {
+          color: #111827;
+        }
+
+        .hero-date-wrap:focus-within .hero-date-placeholder {
+          display: none;
+        }
+
         .form-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -698,11 +727,21 @@ export default function ClinicHero() {
                   <option>Aligners / Smile Correction</option>
                   <option>Kids Dentistry</option>
                 </select>
-                <input
-                  className="hero-field"
-                  name="appointmentDateTime"
-                  type="datetime-local"
-                />
+                <div className="hero-date-wrap">
+                  {!heroAppointmentDateTime && (
+                    <span className="hero-date-placeholder">Appointment Date</span>
+                  )}
+                  <input
+                    className={`hero-field hero-date-field ${
+                      heroAppointmentDateTime ? "" : "is-empty"
+                    }`}
+                    name="appointmentDateTime"
+                    type="datetime-local"
+                    aria-label="Appointment Date and Time"
+                    value={heroAppointmentDateTime}
+                    onChange={(event) => setHeroAppointmentDateTime(event.target.value)}
+                  />
+                </div>
               </div>
 
               <button
