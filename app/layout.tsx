@@ -17,6 +17,20 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Montage Clinic",
   description: "Your trusted healthcare partner",
+    icons: {
+    icon: [
+      { url: "/image.png", sizes: "any" },
+      { url: "/image.png", sizes: "16x16", type: "image/png" },
+      { url: "/image.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/image.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "icon", url: "/image.png", sizes: "192x192", type: "image/png" },
+      { rel: "icon", url: "/image.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
