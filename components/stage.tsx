@@ -78,7 +78,7 @@ export default function ConsultationStages() {
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
-        .font-playfair { font-family: 'Playfair Display', Georgia, serif; }
+        .font-playfair { font-family: 'Outfit', sans-serif; }
         .font-dm { font-family: 'DM Sans', sans-serif; }
 
         .consultation-section {
@@ -133,7 +133,7 @@ export default function ConsultationStages() {
 
         .stage-heading {
           margin: 0 0 14px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(30px, 3.4vw, 44px);
           font-weight: 900;
           color: #111827;
@@ -256,7 +256,7 @@ export default function ConsultationStages() {
           left: 16px;
           bottom: 14px;
           z-index: 1;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           color: #ffffff;
           font-size: 52px;
           font-weight: 900;
@@ -276,7 +276,7 @@ export default function ConsultationStages() {
 
         .card-title {
           margin: 0;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           color: #111827;
           font-size: 27px;
           font-weight: 900;

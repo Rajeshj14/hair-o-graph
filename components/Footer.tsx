@@ -3,11 +3,11 @@
 import EndFooter from "./endfooter";
 
 const footerLinks = [
-  "Home",
-  "Treatments",
-  "Why Choose Us",
-  "Testimonials",
-  "FAQ",
+  { name: "Home", href: "#" },
+  { name: "About Us", href: "#about" },
+  { name: "Doctor", href: "#doctor" },
+  { name: "Process", href: "#process" },
+  { name: "Treatments", href: "#treatments" },
 ];
 
 const services = [
@@ -61,7 +61,7 @@ export default function Footer() {
 
         .footer-title {
           margin: 0;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 34px;
           line-height: 1;
           font-weight: 900;
@@ -96,8 +96,9 @@ export default function Footer() {
           list-style: none;
         }
 
-        .footer-list p,
+        .footer-list a,
         .footer-list span {
+          display: inline-block;
           color: rgba(51,65,85,0.68);
           font-size: 13px;
           line-height: 1.5;
@@ -233,8 +234,8 @@ export default function Footer() {
             <h3>Quick Links</h3>
             <ul className="footer-list">
               {footerLinks.map((link) => (
-                <li key={link}>
-                  <p>{link}</p>
+                <li key={link.name}>
+                  <a href={link.href}>{link.name}</a>
                 </li>
               ))}
             </ul>

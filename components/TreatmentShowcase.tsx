@@ -107,7 +107,7 @@ export default function TreatmentShowcase() {
         .tg-title {
           margin: 0;
           max-width: 780px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(40px, 5vw, 64px);
           line-height: 0.92;
           font-weight: 900;
@@ -179,7 +179,7 @@ export default function TreatmentShowcase() {
           top: 24px;
           left: 24px;
           z-index: 1;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 58px;
           font-weight: 900;
           line-height: 1;
@@ -210,7 +210,7 @@ export default function TreatmentShowcase() {
 
         .tg-media-copy h3 {
           margin: 0 0 12px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(34px, 4vw, 56px);
           font-weight: 900;
           line-height: 0.96;

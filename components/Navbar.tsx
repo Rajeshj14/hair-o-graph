@@ -277,7 +277,6 @@ export default function Navbar() {
             <select className="booking-field" name="treatment" defaultValue="">
               <option value="" disabled>Treatment</option>
               <option>Hair Fall / Hair Loss</option>
-              <option>PRP / GFC</option>
               <option>Hair Transplant</option>
               <option>Acne / Skin Treatment</option>
               <option>Pigmentation / Glow Treatment</option>

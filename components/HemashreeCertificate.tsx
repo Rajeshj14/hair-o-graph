@@ -1,6 +1,6 @@
 export default function HemashreeCertificate() {
   return (
-    <section id="doctor" className="relative overflow-hidden bg-[#f7f9ff] px-4 py-6 sm:px-6 lg:px-8">
+    <section id="doctor" className="relative overflow-hidden bg-[#f7f9ff] px-4 pb-6 sm:px-6 lg:px-8">
       <style>{`
         .doctor-header {
           position: relative;
@@ -48,13 +48,16 @@ export default function HemashreeCertificate() {
 
         .doctor-heading {
           margin: 0 0 14px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(30px, 3.4vw, 44px);
           font-weight: 900;
           color: #111827;
           line-height: 1.12;
           letter-spacing: 0;
         }
+          .doctores{
+          font-family: 'Outfit', sans-serif;
+          }
 
         .doctor-heading span {
           color: #EF3340;
@@ -103,8 +106,8 @@ export default function HemashreeCertificate() {
         <div className="order-2 flex h-full flex-col justify-center border border-[#334E9B]/15 bg-white/92 p-6 shadow-xl shadow-[#334E9B]/8 backdrop-blur sm:p-8 lg:order-1 lg:p-10">
 
 
-          <h2 className="font-serif text-2xl font-black leading-tight text-[#111827] sm:text-2xl">
-           Dr. E. Hema Shree BDS | FMC, Aesthetic Practitioner & Cosmetology Specialist
+          <h2 className="doctores text-2xl font-black leading-tight text-[#111827] sm:text-2xl">
+           Dr. E. Hema Shree, BDS | FMC, Aesthetic Practitioner & Cosmetology Specialist
           </h2>
 
           <div className="mt-6 space-y-5 text-[15px] leading-8 text-slate-600">

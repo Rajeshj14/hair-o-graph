@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
             position: relative;
             margin: 0 auto;
             max-width: 640px;
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Outfit', sans-serif;
             font-size: clamp(40px, 5vw, 64px);
             font-weight: 900;
             line-height: 1.1;
@@ -170,7 +170,7 @@ export default function PrivacyPolicyPage() {
 
           .pp-card-title {
             margin: 0 0 14px;
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 20px;
             font-weight: 700;
             color: #111827;
@@ -199,7 +199,7 @@ export default function PrivacyPolicyPage() {
 
           .pp-contact-text h3 {
             margin: 0 0 6px;
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 20px;
             font-weight: 700;
             color: #111827;

@@ -177,7 +177,7 @@ export default function ClinicHero() {
         .hero-title {
           margin: 0;
           max-width: 680px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           line-height: 0.98;
@@ -376,7 +376,7 @@ export default function ClinicHero() {
 
         .form-title {
           margin: 0;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           color: #111827;
           font-size: 34px;
           font-weight: 900;
@@ -495,7 +495,7 @@ export default function ClinicHero() {
         .hero-stat strong {
           display: block;
           color: #EF3340;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 25px;
           line-height: 1;
         }
@@ -718,7 +718,6 @@ export default function ClinicHero() {
                     Treatment
                   </option>
                   <option>Hair Fall / Hair Loss</option>
-                  <option>PRP / GFC</option>
                   <option>Hair Transplant</option>
                   <option>Acne / Skin Treatment</option>
                   <option>Pigmentation / Glow Treatment</option>

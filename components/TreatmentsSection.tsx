@@ -106,7 +106,7 @@ export default function TreatmentsSection() {
         .tx-title {
           margin: 0;
           max-width: 760px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           line-height: 0.92;
@@ -206,7 +206,7 @@ export default function TreatmentsSection() {
         .tx-mast h3 {
           margin: 0;
           max-width: 640px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(32px, 4vw, 60px);
           font-weight: 900;
           line-height: 1;
@@ -247,7 +247,7 @@ export default function TreatmentsSection() {
         .tx-stat strong {
           display: block;
           color: #EF3340;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 22px;
           line-height: 1;
         }
@@ -321,7 +321,7 @@ export default function TreatmentsSection() {
           top: 18px;
           left: 20px;
           z-index: 1;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 48px;
           font-weight: 900;
           line-height: 1;
@@ -363,7 +363,7 @@ export default function TreatmentsSection() {
 
         .tx-card-title h3 {
           margin: 0;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 42px;
           font-weight: 900;
           line-height: 0.95;

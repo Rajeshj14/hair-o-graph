@@ -90,7 +90,7 @@ export default function WhyChooseTreatments() {
 
         .why-title {
           margin: 0 0 14px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(30px, 3.4vw, 44px);
           font-weight: 900;
           line-height: 1.12;
@@ -165,7 +165,7 @@ export default function WhyChooseTreatments() {
           display: block;
           margin-bottom: 34px;
           color: rgba(239,51,64,0.78);
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 42px;
           font-weight: 900;
           line-height: 1;

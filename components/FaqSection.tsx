@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 const faqs = [
   {
     q: "What conditions do you treat?",
@@ -52,6 +54,8 @@ const faqs = [
 ];
 
 export default function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
     <section className="faq-section">
       <style>{`
@@ -119,7 +123,7 @@ export default function FaqSection() {
 
         .faq-title {
           margin: 0 0 14px;
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(30px, 3.4vw, 44px);
           line-height: 1.12;
           font-weight: 900;
@@ -144,12 +148,12 @@ export default function FaqSection() {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 18px;
+          align-items: start;
         }
 
         .faq-card {
           position: relative;
-          min-height: 250px;
-          padding: 26px;
+          padding: 0;
           border: 1px solid rgba(51,78,155,0.16);
           background:
             linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,248,255,0.9));
@@ -175,7 +179,7 @@ export default function FaqSection() {
           box-shadow: 0 18px 46px rgba(51,78,155,0.14);
         }
 
-        .faq-card:hover h3 {
+        .faq-card:hover .faq-question {
           color: #111827;
         }
 
@@ -183,18 +187,33 @@ export default function FaqSection() {
           color: rgba(31,41,55,0.82);
         }
 
+        .faq-trigger {
+          position: relative;
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 22px;
+          align-items: start;
+          padding: 26px;
+          border: 0;
+          background: transparent;
+          color: inherit;
+          text-align: left;
+          cursor: pointer;
+        }
+
         .faq-number {
           display: block;
           margin-bottom: 22px;
           color: rgba(239,51,64,0.78);
-          font-family: 'Playfair Display', Georgia, serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 42px;
           font-weight: 900;
           line-height: 1;
         }
 
-        .faq-card h3 {
-          margin: 0 0 18px;
+        .faq-question {
+          margin: 0;
           color: #111827;
           font-size: 18px;
           font-weight: 800;
@@ -207,6 +226,27 @@ export default function FaqSection() {
           margin: 0;
           padding: 0;
           list-style: none;
+        }
+
+        .faq-answer {
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          transition: grid-template-rows 0.28s ease, opacity 0.24s ease;
+        }
+
+        .faq-answer-inner {
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        .faq-card.is-open .faq-answer {
+          grid-template-rows: 1fr;
+          opacity: 1;
+        }
+
+        .faq-card.is-open .faq-answer-inner {
+          padding: 0 26px 26px;
         }
 
         .faq-list li {
@@ -227,23 +267,27 @@ export default function FaqSection() {
         }
 
         .faq-mark {
-          position: absolute;
-          right: 24px;
-          top: 24px;
           width: 36px;
           height: 36px;
+          flex: 0 0 auto;
           display: grid;
           place-items: center;
           border: 1px solid rgba(239,51,64,0.32);
           color: #EF3340;
           font-size: 18px;
           font-weight: 900;
-          transition: background 0.25s ease, color 0.25s ease;
+          line-height: 1;
+          transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
         }
 
-        .faq-card:hover .faq-mark {
+        .faq-card:hover .faq-mark,
+        .faq-card.is-open .faq-mark {
           background: #EF3340;
           color: #fff;
+        }
+
+        .faq-card.is-open .faq-mark {
+          transform: rotate(45deg);
         }
 
         @media (max-width: 980px) {
@@ -280,7 +324,15 @@ export default function FaqSection() {
 
           .faq-card {
             min-height: auto;
+          }
+
+          .faq-trigger {
+            min-height: auto;
             padding: 24px;
+          }
+
+          .faq-card.is-open .faq-answer-inner {
+            padding: 0 24px 24px;
           }
         }
       `}</style>
@@ -301,15 +353,38 @@ export default function FaqSection() {
 
         <div className="faq-grid">
           {faqs.map((faq, index) => (
-            <article className="faq-card" key={faq.q}>
-              <span className="faq-number">{String(index + 1).padStart(2, "0")}</span>
-              <span className="faq-mark">?</span>
-              <h3>{faq.q}</h3>
-              <ul className="faq-list">
-                {faq.a.map((answer) => (
-                  <li key={answer}>{answer}</li>
-                ))}
-              </ul>
+            <article
+              className={`faq-card${openIndex === index ? " is-open" : ""}`}
+              key={faq.q}
+            >
+              <button
+                className="faq-trigger"
+                type="button"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                onClick={() =>
+                  setOpenIndex(openIndex === index ? null : index)
+                }
+              >
+                <span>
+                  <span className="faq-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="faq-question">{faq.q}</span>
+                </span>
+                <span className="faq-mark" aria-hidden="true">
+                  +
+                </span>
+              </button>
+              <div className="faq-answer" id={`faq-answer-${index}`}>
+                <div className="faq-answer-inner">
+                  <ul className="faq-list">
+                    {faq.a.map((answer) => (
+                      <li key={answer}>{answer}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </article>
           ))}
         </div>
